@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bala Murugan | Software Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -18,17 +20,17 @@
             --gradient: linear-gradient(135deg, #6366f1, #06b6d4, #8b5cf6);
             --card-bg: rgba(15, 23, 42, 0.7);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         html {
             scroll-behavior: smooth;
         }
-        
+
         body {
             font-family: 'Poppins', sans-serif;
             background: var(--darker);
@@ -36,7 +38,7 @@
             line-height: 1.6;
             overflow-x: hidden;
         }
-        
+
         /* Animated Background */
         .background {
             position: fixed;
@@ -46,26 +48,26 @@
             height: 100%;
             z-index: -2;
         }
-        
+
         .gradient-bg {
             position: absolute;
             width: 100%;
             height: 100%;
             background: radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
+                radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
         }
-        
+
         .grid-pattern {
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 50px 50px;
             mask-image: radial-gradient(circle at center, black 30%, transparent 70%);
         }
-        
+
         /* Navigation */
         nav {
             position: fixed;
@@ -77,7 +79,7 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(99, 102, 241, 0.2);
         }
-        
+
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -85,7 +87,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .logo {
             font-size: 1.8rem;
             font-weight: 800;
@@ -94,12 +96,12 @@
             background-clip: text;
             color: transparent;
         }
-        
+
         .nav-links {
             display: flex;
             gap: 2.5rem;
         }
-        
+
         .nav-links a {
             color: var(--gray);
             text-decoration: none;
@@ -108,11 +110,11 @@
             transition: all 0.3s;
             position: relative;
         }
-        
+
         .nav-links a:hover {
             color: var(--light);
         }
-        
+
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -123,11 +125,11 @@
             background: var(--gradient);
             transition: width 0.3s;
         }
-        
+
         .nav-links a:hover::after {
             width: 100%;
         }
-        
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -136,17 +138,17 @@
             padding: 0 2rem;
             position: relative;
         }
-        
+
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
         }
-        
+
         .hero-text {
             max-width: 800px;
         }
-        
+
         .intro {
             display: inline-block;
             background: rgba(99, 102, 241, 0.1);
@@ -159,12 +161,19 @@
             border: 1px solid rgba(6, 182, 212, 0.3);
             animation: float 3s ease-in-out infinite;
         }
-        
+
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
-        
+
         .name {
             font-size: 5rem;
             font-weight: 800;
@@ -177,13 +186,13 @@
             opacity: 0;
             animation: slideUp 1s forwards;
         }
-        
+
         .title-container {
             height: 80px;
             overflow: hidden;
             margin-bottom: 2rem;
         }
-        
+
         .title {
             font-size: 2.2rem;
             font-weight: 600;
@@ -191,7 +200,7 @@
             opacity: 0;
             animation: slideUp 1s 0.3s forwards;
         }
-        
+
         .highlight {
             background: var(--gradient);
             -webkit-background-clip: text;
@@ -199,7 +208,7 @@
             color: transparent;
             font-weight: 700;
         }
-        
+
         .hero-description {
             font-size: 1.2rem;
             color: var(--gray);
@@ -208,7 +217,7 @@
             opacity: 0;
             animation: fadeIn 1s 0.6s forwards;
         }
-        
+
         /* Stats */
         .stats {
             display: flex;
@@ -216,11 +225,11 @@
             margin-bottom: 3rem;
             flex-wrap: wrap;
         }
-        
+
         .stat-item {
             text-align: center;
         }
-        
+
         .stat-number {
             font-size: 3rem;
             font-weight: 800;
@@ -230,20 +239,20 @@
             color: transparent;
             line-height: 1;
         }
-        
+
         .stat-label {
             font-size: 0.9rem;
             color: var(--gray);
             margin-top: 0.5rem;
         }
-        
+
         /* CTA Buttons */
         .cta-buttons {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
         }
-        
+
         .btn {
             padding: 1.2rem 2.5rem;
             border-radius: 12px;
@@ -257,47 +266,47 @@
             border: none;
             cursor: pointer;
         }
-        
+
         .btn-primary {
             background: var(--gradient);
             color: white;
             box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
         }
-        
+
         .btn-secondary {
             background: rgba(255, 255, 255, 0.1);
             color: var(--light);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.15);
             transform: translateY(-5px);
             border-color: rgba(99, 102, 241, 0.3);
         }
-        
+
         /* Sections */
         section {
             padding: 8rem 2rem;
             position: relative;
         }
-        
+
         .section-container {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
         }
-        
+
         .section-title {
             font-size: 3rem;
             font-weight: 800;
@@ -309,7 +318,7 @@
             opacity: 0;
             animation: slideUp 1s forwards;
         }
-        
+
         .section-subtitle {
             font-size: 1.2rem;
             color: var(--gray);
@@ -318,14 +327,14 @@
             opacity: 0;
             animation: slideUp 1s 0.2s forwards;
         }
-        
+
         /* Skills Grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem;
         }
-        
+
         .skill-card {
             background: var(--card-bg);
             border-radius: 20px;
@@ -338,7 +347,7 @@
             opacity: 0;
             animation: slideUp 0.8s forwards;
         }
-        
+
         .skill-card::before {
             content: '';
             position: absolute;
@@ -351,24 +360,24 @@
             transition: opacity 0.4s;
             z-index: -1;
         }
-        
+
         .skill-card:hover {
             transform: translateY(-10px);
             border-color: transparent;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-        
+
         .skill-card:hover::before {
             opacity: 0.1;
         }
-        
+
         .skill-header {
             display: flex;
             align-items: center;
             gap: 1.2rem;
             margin-bottom: 1.5rem;
         }
-        
+
         .skill-icon {
             width: 60px;
             height: 60px;
@@ -380,19 +389,19 @@
             font-size: 1.8rem;
             color: var(--primary);
         }
-        
+
         .skill-card h3 {
             font-size: 1.5rem;
             font-weight: 600;
         }
-        
+
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
             gap: 0.8rem;
             margin-top: 1.5rem;
         }
-        
+
         .tech-tag {
             padding: 0.5rem 1.2rem;
             background: rgba(99, 102, 241, 0.1);
@@ -403,19 +412,19 @@
             border: 1px solid rgba(99, 102, 241, 0.2);
             transition: all 0.3s;
         }
-        
+
         .tech-tag:hover {
             background: rgba(99, 102, 241, 0.2);
             transform: translateY(-2px);
         }
-        
+
         /* Experience Timeline */
         .experience-timeline {
             position: relative;
             max-width: 800px;
             margin: 0 auto;
         }
-        
+
         .timeline-line {
             position: absolute;
             left: 0;
@@ -425,7 +434,7 @@
             background: var(--gradient);
             border-radius: 3px;
         }
-        
+
         .experience-item {
             background: var(--card-bg);
             border-radius: 20px;
@@ -439,13 +448,13 @@
             opacity: 0;
             animation: slideUp 0.8s forwards;
         }
-        
+
         .experience-item:hover {
             transform: translateX(10px);
             border-color: var(--primary);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-        
+
         .experience-item::before {
             content: '';
             position: absolute;
@@ -458,7 +467,7 @@
             border: 4px solid var(--darker);
             z-index: 1;
         }
-        
+
         .experience-header {
             display: flex;
             justify-content: space-between;
@@ -467,19 +476,19 @@
             flex-wrap: wrap;
             gap: 1rem;
         }
-        
+
         .experience-title {
             font-size: 1.6rem;
             font-weight: 600;
         }
-        
+
         .experience-company {
             color: var(--secondary);
             font-weight: 600;
             margin-top: 0.5rem;
             display: block;
         }
-        
+
         .experience-duration {
             background: rgba(99, 102, 241, 0.1);
             color: var(--primary);
@@ -488,14 +497,14 @@
             font-weight: 600;
             font-size: 0.9rem;
         }
-        
+
         /* Projects Grid */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2.5rem;
         }
-        
+
         .project-card {
             background: var(--card-bg);
             border-radius: 20px;
@@ -506,47 +515,47 @@
             opacity: 0;
             animation: slideUp 0.8s forwards;
         }
-        
+
         .project-card:hover {
             transform: translateY(-10px);
             border-color: var(--primary);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-        
+
         .project-header {
             padding: 2rem 2rem 1.5rem;
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
             border-bottom: 1px solid rgba(99, 102, 241, 0.2);
         }
-        
+
         .project-title {
             font-size: 1.6rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
-        
+
         .project-tech {
             color: var(--secondary);
             font-weight: 500;
             font-size: 0.95rem;
         }
-        
+
         .project-body {
             padding: 2rem;
         }
-        
+
         .project-features {
             list-style: none;
             margin-top: 1.5rem;
         }
-        
+
         .project-features li {
             margin-bottom: 0.8rem;
             padding-left: 1.5rem;
             position: relative;
             color: var(--gray);
         }
-        
+
         .project-features li::before {
             content: '▸';
             position: absolute;
@@ -554,7 +563,7 @@
             color: var(--primary);
             font-weight: bold;
         }
-        
+
         /* Contact Section */
         .contact-section {
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
@@ -562,14 +571,14 @@
             padding: 4rem;
             margin-top: 4rem;
         }
-        
+
         .contact-info {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             justify-content: center;
         }
-        
+
         .contact-item {
             display: flex;
             align-items: center;
@@ -583,14 +592,14 @@
             border: 1px solid rgba(99, 102, 241, 0.2);
             min-width: 250px;
         }
-        
+
         .contact-item:hover {
             transform: translateY(-5px);
             border-color: var(--primary);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             background: rgba(15, 23, 42, 0.9);
         }
-        
+
         .contact-icon {
             width: 50px;
             height: 50px;
@@ -601,7 +610,7 @@
             justify-content: center;
             font-size: 1.3rem;
         }
-        
+
         /* Footer */
         footer {
             padding: 4rem 2rem;
@@ -609,14 +618,14 @@
             border-top: 1px solid rgba(99, 102, 241, 0.2);
             background: rgba(2, 6, 23, 0.8);
         }
-        
+
         .social-links {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
             margin: 2rem 0;
         }
-        
+
         .social-links a {
             width: 50px;
             height: 50px;
@@ -631,86 +640,91 @@
             transition: all 0.3s;
             border: 1px solid rgba(99, 102, 241, 0.2);
         }
-        
+
         .social-links a:hover {
             background: var(--gradient);
             transform: translateY(-5px);
             border-color: transparent;
         }
-        
+
         /* Animations */
         @keyframes slideUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         @keyframes fadeIn {
-            to { opacity: 1; }
+            to {
+                opacity: 1;
+            }
         }
-        
+
         /* Responsive */
         @media (max-width: 768px) {
             .name {
                 font-size: 3.5rem;
             }
-            
+
             .title {
                 font-size: 1.8rem;
             }
-            
+
             .section-title {
                 font-size: 2.5rem;
             }
-            
+
             .nav-links {
                 display: none;
             }
-            
+
             .contact-section {
                 padding: 2rem;
             }
-            
-            .skill-card, .project-card {
+
+            .skill-card,
+            .project-card {
                 padding: 2rem;
             }
         }
-        
+
         @media (max-width: 480px) {
             .name {
                 font-size: 2.8rem;
             }
-            
+
             .stats {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 2rem;
             }
-            
+
             .cta-buttons {
                 flex-direction: column;
             }
-            
+
             .btn {
                 width: 100%;
                 justify-content: center;
             }
-            
+
             .experience-item {
                 padding-left: 2.5rem;
             }
-            
+
             .experience-item::before {
                 left: 1.2rem;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Background -->
     <div class="background">
@@ -741,9 +755,10 @@
                     <h2 class="title">Building <span class="highlight">Digital Experiences</span> That Scale</h2>
                 </div>
                 <p class="hero-description">
-                    Specializing in React ecosystems with 1.5+ years of experience delivering high-performance web and mobile applications. Passionate about creating scalable solutions that drive business growth.
+                    Specializing in React ecosystems with 1.5+ years of experience delivering high-performance web and
+                    mobile applications. Passionate about creating scalable solutions that drive business growth.
                 </p>
-                
+
                 <div class="stats">
                     <div class="stat-item">
                         <div class="stat-number">1.5+</div>
@@ -758,7 +773,7 @@
                         <div class="stat-label">Performance Boost</div>
                     </div>
                 </div>
-                
+
                 <div class="cta-buttons">
                     <a href="#projects" class="btn btn-primary">
                         <i class="fas fa-code"></i> View Projects
@@ -778,7 +793,7 @@
                 <h2 class="section-title">Technical Expertise</h2>
                 <p class="section-subtitle">Mastering the tools that build tomorrow's digital experiences</p>
             </div>
-            
+
             <div class="skills-grid">
                 <div class="skill-card" style="animation-delay: 0.1s">
                     <div class="skill-header">
@@ -795,7 +810,7 @@
                         <span class="tech-tag">TypeScript</span>
                     </div>
                 </div>
-                
+
                 <div class="skill-card" style="animation-delay: 0.2s">
                     <div class="skill-header">
                         <div class="skill-icon">
@@ -811,7 +826,7 @@
                         <span class="tech-tag">Zustand</span>
                     </div>
                 </div>
-                
+
                 <div class="skill-card" style="animation-delay: 0.3s">
                     <div class="skill-header">
                         <div class="skill-icon">
@@ -838,10 +853,10 @@
                 <h2 class="section-title">Professional Journey</h2>
                 <p class="section-subtitle">Building expertise through real-world challenges</p>
             </div>
-            
+
             <div class="experience-timeline">
                 <div class="timeline-line"></div>
-                
+
                 <div class="experience-item" style="animation-delay: 0.1s">
                     <div class="experience-header">
                         <div>
@@ -850,9 +865,11 @@
                         </div>
                         <div class="experience-duration">Aug 2025 – Present</div>
                     </div>
-                    <p>Engineered cross-platform mobile features for 2+ production applications. Implemented Redux and Context API reducing data inconsistencies by 30%. Integrated 20+ REST APIs and optimized component rendering cutting screen load time by 25%.</p>
+                    <p>Engineered cross-platform mobile features for 2+ production applications. Implemented Redux and
+                        Context API reducing data inconsistencies by 30%. Integrated 20+ REST APIs and optimized
+                        component rendering cutting screen load time by 25%.</p>
                 </div>
-                
+
                 <div class="experience-item" style="animation-delay: 0.2s">
                     <div class="experience-header">
                         <div>
@@ -861,7 +878,9 @@
                         </div>
                         <div class="experience-duration">Nov 2024 – Jul 2025</div>
                     </div>
-                    <p>Architected reusable UI components accelerating development cycles by 30%. Delivered 3+ web and mobile projects. Improved UI responsiveness by 20% through code optimization and performance fixes.</p>
+                    <p>Architected reusable UI components accelerating development cycles by 30%. Delivered 3+ web and
+                        mobile projects. Improved UI responsiveness by 20% through code optimization and performance
+                        fixes.</p>
                 </div>
             </div>
         </div>
@@ -874,7 +893,7 @@
                 <h2 class="section-title">Featured Projects</h2>
                 <p class="section-subtitle">Real solutions to complex problems</p>
             </div>
-            
+
             <div class="projects-grid">
                 <div class="project-card" style="animation-delay: 0.1s">
                     <div class="project-header">
@@ -882,7 +901,8 @@
                         <div class="project-tech">React Native | Dec 2024 – Jun 2025</div>
                     </div>
                     <div class="project-body">
-                        <p>Comprehensive cryptocurrency trading application with real-time market data and secure wallet management.</p>
+                        <p>Comprehensive cryptocurrency trading application with real-time market data and secure wallet
+                            management.</p>
                         <ul class="project-features">
                             <li>6+ core modules including Home, Chat, Wallet</li>
                             <li>25% performance improvement through optimization</li>
@@ -890,14 +910,15 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="project-card" style="animation-delay: 0.2s">
                     <div class="project-header">
                         <h3 class="project-title">RIGHTHMS – Hotel Management</h3>
                         <div class="project-tech">React Native | Current Project</div>
                     </div>
                     <div class="project-body">
-                        <p>Complete hotel management system with booking, restaurant management, and financial tracking.</p>
+                        <p>Complete hotel management system with booking, restaurant management, and financial tracking.
+                        </p>
                         <ul class="project-features">
                             <li>Room booking & menu management system</li>
                             <li>Real-time financial tracking with Redux & React Query</li>
@@ -905,21 +926,73 @@
                         </ul>
                     </div>
                 </div>
-                
-                <div class="project-card" style="animation-delay: 0.3s">
+
+                <div class="project-card" style="animation-delay: 0.6s">
                     <div class="project-header">
-                        <h3 class="project-title">Smart Service System</h3>
-                        <div class="project-tech">Next.js | Jun 2024 – Aug 2024</div>
+                        <h3 class="project-title">Smart Service – Management System</h3>
+                        <div class="project-tech">Next.js | Full Stack</div>
                     </div>
                     <div class="project-body">
-                        <p>Customer & employee management system with enhanced forms and authentication.</p>
+                        <p>Employee and customer service management platform with secure authentication.</p>
                         <ul class="project-features">
-                            <li>NextAuth authentication integration</li>
-                            <li>Google Analytics for user tracking</li>
-                            <li>Enhanced UI/UX design and navigation</li>
+                            <li>Integrated NextAuth for secure login</li>
+                            <li>Implemented analytics tracking for user behavior insights</li>
+                            <li>Optimized UI responsiveness across devices</li>
                         </ul>
                     </div>
                 </div>
+
+
+                <div class="project-card" style="animation-delay: 0.4s">
+                    <div class="project-header">
+                        <h3 class="project-title">Cornerstone – Business Platform</h3>
+                        <div class="project-tech">React.js | Live Project</div>
+                    </div>
+                    <div class="project-body">
+                        <p>Corporate business website delivering structured service presentation and optimized
+                            performance.</p>
+                        <ul class="project-features">
+                            <li>Developed responsive UI with modern component architecture</li>
+                            <li>Optimized performance and loading speed</li>
+                            <li>Deployed production-ready build for client usage</li>
+                        </ul>
+                        <a href="https://cornerstone.lk/" target="_blank">View Live Project</a>
+                    </div>
+                </div>
+
+                <div class="project-card" style="animation-delay: 0.7s">
+                    <div class="project-header">
+                        <h3 class="project-title">Smart Steno – Online Learning Platform</h3>
+                        <div class="project-tech">React.js | Azure Deployment</div>
+                    </div>
+                    <div class="project-body">
+                        <p>Online shorthand learning and typing practice platform deployed on Microsoft Azure.</p>
+                        <ul class="project-features">
+                            <li>Interactive typing practice modules</li>
+                            <li>Performance tracking system for learners</li>
+                            <li>Cloud deployment using Azure App Services</li>
+                        </ul>
+                        <a href="https://smartsteno.azurewebsites.net/" target="_blank">View Live Project</a>
+                    </div>
+                </div>
+
+
+
+                <div class="project-card" style="animation-delay: 0.5s">
+                    <div class="project-header">
+                        <h3 class="project-title">RightKOT – Kitchen Order System</h3>
+                        <div class="project-tech">React Native | POS Integration</div>
+                    </div>
+                    <div class="project-body">
+                        <p>Real-time kitchen order tracking system integrated with hotel POS operations.</p>
+                        <ul class="project-features">
+                            <li>Live order status synchronization using WebSocket</li>
+                            <li>Reduced kitchen processing delay by 30%</li>
+                            <li>Integrated with hotel billing & inventory systems</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -931,7 +1004,7 @@
                 <h2 class="section-title">Let's Connect</h2>
                 <p class="section-subtitle">Ready to build something amazing together?</p>
             </div>
-            
+
             <div class="contact-section">
                 <div class="contact-info">
                     <a href="tel:+919384902854" class="contact-item">
@@ -943,7 +1016,7 @@
                             <p>+91-9384902854</p>
                         </div>
                     </a>
-                    
+
                     <a href="mailto:snbalamurgan20@gmail.com" class="contact-item">
                         <div class="contact-icon">
                             <i class="fas fa-envelope"></i>
@@ -953,7 +1026,7 @@
                             <p>snbalamurgan20@gmail.com</p>
                         </div>
                     </a>
-                    
+
                     <a href="https://wa.me/919384902854" target="_blank" class="contact-item">
                         <div class="contact-icon">
                             <i class="fab fa-whatsapp"></i>
@@ -970,16 +1043,18 @@
 
     <!-- Footer -->
     <footer>
-        <h3 style="font-size: 1.8rem; margin-bottom: 1rem; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent;">Bala Murugan</h3>
+        <h3
+            style="font-size: 1.8rem; margin-bottom: 1rem; background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent;">
+            Bala Murugan</h3>
         <p style="color: var(--gray); margin-bottom: 2rem;">React & React Native Developer</p>
-        
+
         <div class="social-links">
             <a href="#"><i class="fab fa-linkedin-in"></i></a>
             <a href="#"><i class="fab fa-github"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="mailto:snbalamurgan20@gmail.com"><i class="fas fa-envelope"></i></a>
         </div>
-        
+
         <p style="color: var(--gray); margin-top: 2rem; font-size: 0.9rem;">
             © 2025 Bala Murugan. All rights reserved.
         </p>
@@ -991,7 +1066,7 @@
             threshold: 0.1,
             rootMargin: '0px 0px -100px 0px'
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1003,20 +1078,20 @@
                 }
             });
         }, observerOptions);
-        
+
         // Observe elements for animation
         document.querySelectorAll('.skill-card, .project-card, .experience-item, .section-title, .section-subtitle').forEach(el => {
             el.style.animationDelay = el.style.animationDelay || '0s';
             observer.observe(el);
         });
-        
+
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
+
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
@@ -1026,7 +1101,7 @@
                 }
             });
         });
-        
+
         // Header scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
@@ -1040,4 +1115,5 @@
         });
     </script>
 </body>
+
 </html>
