@@ -2,139 +2,225 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Bala Murugan S N — Full Stack Engineer, React Native & React Developer">
-  <title>Bala Murugan S N | Full Stack Engineer</title>
+  <meta charset="UTF-8" />
 
-  <!-- Poppins -->
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description"
+        content="Bala Murugan - Full Stack Engineer, React Native Developer and React Developer." />
+
+  <title>Bala Murugan | Full Stack Engineer</title>
+
+
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+
   <script>
+
     tailwind.config = {
+
       theme: {
+
         extend: {
-          fontFamily: { poppins: ['Poppins', 'sans-serif'] },
+
+          fontFamily: {
+            poppins: ["Poppins", "sans-serif"]
+          },
+
           colors: {
-            ink: '#0b1f3a',
-            blue: '#1769e0',
-            sky: '#35baf6',
-            pale: '#f3f9ff'
+
+            primary: "#0f6fff",
+
+            skyblue: "#38bdf8",
+
+            dark: "#0f172a",
+
+            soft: "#f5f9ff"
+
+          },
+
+          boxShadow: {
+
+            soft:
+              "0 20px 60px rgba(15, 111, 255, 0.10)",
+
+            blue:
+              "0 20px 60px rgba(15, 111, 255, 0.20)"
+
           }
+
         }
+
       }
+
     }
+
   </script>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
 
-    html {
+  <style>
+
+    * {
       scroll-behavior: smooth;
     }
 
+
     body {
       font-family: "Poppins", sans-serif;
-      color: #0b1f3a;
-      background: #fff;
+      background: #ffffff;
+      color: #0f172a;
       overflow-x: hidden;
     }
 
-    ::selection {
-      background: #1769e0;
-      color: #fff;
+
+    /* ================================
+       CUSTOM SCROLLBAR
+    ================================= */
+
+    ::-webkit-scrollbar {
+      width: 8px;
     }
+
+    ::-webkit-scrollbar-track {
+      background: #f8fafc;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #38bdf8;
+      border-radius: 20px;
+    }
+
+
+    /* ================================
+       NAVBAR
+    ================================= */
+
+    .navbar {
+      transition: all .3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 10px 40px rgba(15,23,42,.08);
+    }
+
+
+    /* ================================
+       GRADIENT TEXT
+    ================================= */
 
     .gradient-text {
-      background: linear-gradient(90deg, #0b1f3a, #1769e0, #35baf6);
+
+      background:
+        linear-gradient(
+          90deg,
+          #0f6fff,
+          #38bdf8
+        );
+
       -webkit-background-clip: text;
       background-clip: text;
+
       color: transparent;
+
     }
 
-    .hero-grid {
+
+    /* ================================
+       HERO GLOW
+    ================================= */
+
+    .hero-glow {
+
+      position: absolute;
+
+      width: 450px;
+      height: 450px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(56,189,248,.18),
+          transparent 70%
+        );
+
+      filter: blur(20px);
+
+      pointer-events: none;
+
+    }
+
+
+    /* ================================
+       GRID BACKGROUND
+    ================================= */
+
+    .grid-bg {
+
       background-image:
-        linear-gradient(rgba(23, 105, 224, .055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(23, 105, 224, .055) 1px, transparent 1px);
-      background-size: 42px 42px;
+
+        linear-gradient(
+          rgba(15,111,255,.045) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(15,111,255,.045) 1px,
+          transparent 1px
+        );
+
+      background-size: 45px 45px;
+
     }
 
-    .glass {
-      background: rgba(255, 255, 255, .78);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
 
-    .shadow-blue {
-      box-shadow: 0 22px 65px rgba(23, 105, 224, .12);
-    }
-
-    .hover-card {
-      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-    }
-
-    .hover-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 24px 60px rgba(23, 105, 224, .14);
-      border-color: rgba(23, 105, 224, .35);
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(35px);
-      transition: opacity .8s ease, transform .8s ease;
-    }
-
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .float {
-      animation: float 5s ease-in-out infinite;
-    }
-
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-12px);
-      }
-    }
-
-    .pulse-dot {
-      animation: pulseDot 2s ease-in-out infinite;
-    }
-
-    @keyframes pulseDot {
-
-      0%,
-      100% {
-        box-shadow: 0 0 0 0 rgba(53, 186, 246, .35);
-      }
-
-      50% {
-        box-shadow: 0 0 0 10px rgba(53, 186, 246, 0);
-      }
-    }
+    /* ================================
+       MARQUEE
+    ================================= */
 
     .marquee {
-      display: flex;
-      width: max-content;
-      animation: marquee 24s linear infinite;
+      overflow: hidden;
+      white-space: nowrap;
     }
 
+
+    .marquee-track {
+
+      display: inline-flex;
+
+      min-width: max-content;
+
+      animation:
+        marquee 25s linear infinite;
+
+    }
+
+
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+
     @keyframes marquee {
+
       from {
         transform: translateX(0);
       }
@@ -142,1059 +228,3014 @@
       to {
         transform: translateX(-50%);
       }
+
     }
 
-    .marquee:hover {
-      animation-play-state: paused;
+
+    /* ================================
+       REVEAL
+    ================================= */
+
+    .reveal {
+
+      opacity: 0;
+
+      transform:
+        translateY(35px);
+
+      transition:
+        opacity .8s ease,
+        transform .8s ease;
+
     }
 
-    .nav-link {
-      position: relative;
+
+    .reveal.active {
+
+      opacity: 1;
+
+      transform:
+        translateY(0);
+
     }
 
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -7px;
-      width: 0;
-      height: 2px;
-      background: #1769e0;
-      transition: width .3s ease;
+
+    /* ================================
+       PROJECT SHOWCASE
+    ================================= */
+
+    .project-showcase {
+
+      transition:
+        transform .45s ease,
+        box-shadow .45s ease,
+        border-color .45s ease;
+
     }
 
-    .nav-link:hover::after {
-      width: 100%;
+
+    .project-showcase:hover {
+
+      transform:
+        translateY(-10px);
+
+      box-shadow:
+        0 30px 80px
+        rgba(15,111,255,.14);
+
+      border-color:
+        rgba(56,189,248,.6);
+
     }
 
-    .project-image {
-      transition: transform .5s ease;
+
+    /* ================================
+       PROJECT MOCKUP
+    ================================= */
+
+    .project-window {
+
+      transition:
+        transform .5s ease;
+
     }
 
-    .project-card:hover .project-image {
-      transform: scale(1.035);
+
+    .project-showcase:hover
+    .project-window {
+
+      transform:
+        scale(1.025)
+        rotateX(2deg)
+        rotateY(-2deg);
+
     }
 
-    .shine {
-      position: relative;
+
+    /* ================================
+       BUTTON
+    ================================= */
+
+    .btn-primary {
+
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+    }
+
+
+    .btn-primary:hover {
+
+      transform:
+        translateY(-3px);
+
+      box-shadow:
+        0 15px 35px
+        rgba(15,111,255,.25);
+
+    }
+
+
+    /* ================================
+       SKILL CARD
+    ================================= */
+
+    .skill-card {
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+
+    }
+
+
+    .skill-card:hover {
+
+      transform:
+        translateY(-7px);
+
+      border-color:
+        rgba(56,189,248,.6);
+
+      box-shadow:
+        0 20px 50px
+        rgba(15,111,255,.09);
+
+    }
+
+
+    /* ================================
+       REVIEW SLIDER
+    ================================= */
+
+    .review-slider {
+
       overflow: hidden;
+
+      width: 100%;
+
     }
 
-    .shine::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -120%;
-      width: 70%;
-      height: 100%;
-      transform: skewX(-20deg);
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .35), transparent);
-      transition: left .7s ease;
+
+    .review-track {
+
+      display: flex;
+
+      width: max-content;
+
+      animation:
+        reviewMove 35s linear infinite;
+
     }
 
-    .shine:hover::before {
-      left: 140%;
-    }
 
     .review-track:hover {
-      animation-play-state: paused;
+
+      animation-play-state:
+        paused;
+
     }
 
-    @media (prefers-reduced-motion: reduce) {
 
-      *,
-      *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
+    @keyframes reviewMove {
+
+      from {
+        transform: translateX(0);
       }
+
+      to {
+        transform: translateX(-50%);
+      }
+
     }
+
+
+    .review-card {
+
+      width: 390px;
+
+      margin-right: 20px;
+
+      flex-shrink: 0;
+
+      transition:
+        transform .3s ease;
+
+    }
+
+
+    .review-card:hover {
+
+      transform:
+        translateY(-8px);
+
+    }
+
+
+    /* ================================
+       PRODUCT GLOW
+    ================================= */
+
+    .product-section {
+
+      background:
+
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(56,189,248,.16),
+          transparent 35%
+        ),
+
+        radial-gradient(
+          circle at 90% 80%,
+          rgba(15,111,255,.14),
+          transparent 35%
+        ),
+
+        #f8fbff;
+
+    }
+
+
+    /* ================================
+       PHONE
+    ================================= */
+
+    .phone {
+
+      transition:
+        transform .5s ease;
+
+    }
+
+
+    .phone:hover {
+
+      transform:
+        rotate(-3deg)
+        translateY(-8px);
+
+    }
+
+
+    /* ================================
+       FLOATING ANIMATION
+    ================================= */
+
+    .float {
+
+      animation:
+        float 4s ease-in-out infinite;
+
+    }
+
+
+    @keyframes float {
+
+      0%,
+      100% {
+
+        transform:
+          translateY(0);
+
+      }
+
+      50% {
+
+        transform:
+          translateY(-12px);
+
+      }
+
+    }
+
+
+    /* ================================
+       MOBILE MENU
+    ================================= */
+
+    #mobileMenu {
+
+      transition:
+        all .3s ease;
+
+    }
+
+
+    /* ================================
+       SELECTION
+    ================================= */
+
+    ::selection {
+
+      background:
+        #38bdf8;
+
+      color:
+        white;
+
+    }
+
   </style>
+
 </head>
 
-<body class="font-poppins">
 
-  <!-- NAVBAR -->
-  <header class="fixed top-0 left-0 right-0 z-50 border-b border-blue-100/70 bg-white/90 backdrop-blur-xl">
-    <div class="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 lg:px-8">
-      <a href="#home" class="group flex items-center gap-2">
-        <span
-          class="grid h-10 w-10 place-items-center rounded-xl bg-blue text-lg font-bold text-white shadow-lg shadow-blue/20">B</span>
-        <span class="hidden text-sm font-bold tracking-wide text-ink sm:block">BALA MURUGAN<span
-            class="text-blue">.</span></span>
+<body>
+
+
+  <!-- =========================================
+       NAVBAR
+  ========================================== -->
+
+  <header
+    id="navbar"
+    class="navbar fixed left-0 top-0 z-50 w-full bg-white/70">
+
+    <div
+      class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+
+      <a
+        href="#home"
+        class="text-xl font-extrabold tracking-tight">
+
+        Bala<span class="text-primary">.</span>
+
       </a>
 
-      <nav class="hidden items-center gap-7 text-sm font-medium text-slate-600 lg:flex">
-        <a class="nav-link hover:text-blue" href="#about">About</a>
-        <a class="nav-link hover:text-blue" href="#skills">Skills</a>
-        <a class="nav-link hover:text-blue" href="#experience">Experience</a>
-        <a class="nav-link hover:text-blue" href="#projects">Projects</a>
-        <a class="nav-link hover:text-blue" href="#reviews">Reviews</a>
-        <a class="nav-link hover:text-blue" href="#contact">Contact</a>
+
+      <!-- Desktop -->
+
+      <nav class="hidden items-center gap-8 md:flex">
+
+        <a
+          href="#home"
+          class="text-sm font-medium text-slate-600 transition hover:text-primary">
+          Home
+        </a>
+
+        <a
+          href="#about"
+          class="text-sm font-medium text-slate-600 transition hover:text-primary">
+          About
+        </a>
+
+        <a
+          href="#skills"
+          class="text-sm font-medium text-slate-600 transition hover:text-primary">
+          Skills
+        </a>
+
+        <a
+          href="#projects"
+          class="text-sm font-medium text-slate-600 transition hover:text-primary">
+          Projects
+        </a>
+
+        <a
+          href="#product"
+          class="text-sm font-medium text-slate-600 transition hover:text-primary">
+          My Product
+        </a>
+
+        <a
+          href="#reviews"
+          class="text-sm font-medium text-slate-600 transition hover:text-primary">
+          Reviews
+        </a>
+
+        <a
+          href="#contact"
+          class="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700">
+          Contact
+        </a>
+
       </nav>
 
-      <a href="#contact"
-        class="shine rounded-full bg-ink px-5 py-2.5 text-xs font-semibold text-white transition hover:bg-blue">
-        Let's Talk →
-      </a>
+
+      <!-- Mobile button -->
+
+      <button
+        id="menuButton"
+        class="rounded-lg border border-slate-200 p-2 md:hidden">
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2">
+
+          <path
+            d="M4 6h16M4 12h16M4 18h16"/>
+
+        </svg>
+
+      </button>
+
     </div>
+
+
+    <!-- Mobile Menu -->
+
+    <div
+      id="mobileMenu"
+      class="hidden border-t bg-white px-5 py-5 md:hidden">
+
+      <div class="flex flex-col gap-4">
+
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#product">My Product</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+
+      </div>
+
+    </div>
+
   </header>
 
-  <!-- HERO -->
-  <main id="home">
-    <section class="hero-grid relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-28">
-      <div class="absolute -right-28 top-24 h-80 w-80 rounded-full bg-sky/20 blur-3xl"></div>
-      <div class="absolute -left-32 bottom-0 h-96 w-96 rounded-full bg-blue/10 blur-3xl"></div>
 
-      <div class="relative mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-[1.25fr_.75fr] lg:px-8">
-        <div class="reveal">
-          <div
-            class="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-4 py-2 text-xs font-semibold text-blue shadow-sm">
-            <span class="pulse-dot h-2.5 w-2.5 rounded-full bg-sky"></span>
+
+  <!-- =========================================
+       HERO
+  ========================================== -->
+
+  <section
+    id="home"
+    class="grid-bg relative flex min-h-screen items-center overflow-hidden pt-24">
+
+    <div
+      class="hero-glow left-[-150px] top-[100px]">
+    </div>
+
+    <div
+      class="hero-glow bottom-[-150px] right-[-100px]">
+    </div>
+
+
+    <div
+      class="mx-auto grid max-w-7xl items-center gap-14 px-5 py-20 lg:grid-cols-[1.2fr_.8fr] lg:px-8">
+
+
+      <!-- Hero content -->
+
+      <div class="reveal">
+
+        <div
+          class="mb-6 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2">
+
+          <span
+            class="h-2 w-2 animate-pulse rounded-full bg-green-500">
+          </span>
+
+          <span
+            class="text-xs font-semibold text-slate-600">
+
             Available for new opportunities
-          </div>
 
-          <p class="mb-4 text-sm font-semibold uppercase tracking-[.24em] text-blue">
-            Full Stack Engineer
-          </p>
+          </span>
 
-          <h1 class="max-w-4xl text-5xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
-            Building <span class="gradient-text">web & mobile</span> products that work.
-          </h1>
-
-          <p class="mt-7 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-            I'm <strong class="text-ink">Bala Murugan S N</strong>, a Full Stack Engineer
-            specializing in <strong class="text-ink">React, React Native and Expo CLI</strong>.
-            I build clean interfaces, practical business applications, REST APIs and
-            responsive digital experiences.
-          </p>
-
-          <div class="mt-9 flex flex-wrap gap-3">
-            <a href="#projects"
-              class="shine rounded-xl bg-blue px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-blue/20 transition hover:-translate-y-1 hover:bg-ink">
-              Explore My Work
-            </a>
-            <a href="#contact"
-              class="rounded-xl border border-blue-100 bg-white px-6 py-3.5 text-sm font-semibold text-ink transition hover:-translate-y-1 hover:border-blue hover:text-blue">
-              Contact Me
-            </a>
-          </div>
-
-          <div class="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-xs font-medium text-slate-500">
-            <span>React.js</span>
-            <span>React Native</span>
-            <span>Expo CLI</span>
-            <span>Next.js</span>
-            <span>Java / Spring Boot</span>
-            <span>MySQL</span>
-          </div>
         </div>
 
-        <div class="reveal relative">
-          <div class="float relative mx-auto max-w-md">
-            <div class="absolute -inset-5 rounded-[2rem] bg-gradient-to-br from-blue/20 to-sky/20 blur-2xl"></div>
-            <div class="glass relative rounded-[2rem] border border-blue-100 p-5 shadow-blue">
-              <div class="rounded-[1.5rem] bg-ink p-6 text-white">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-semibold tracking-wider text-sky">DEVELOPER PROFILE</span>
-                  <span class="rounded-full bg-white/10 px-3 py-1 text-[10px]">2026</span>
-                </div>
 
-                <div class="mt-14">
-                  <p class="text-sm text-blue-200">I BUILD</p>
-                  <h2 class="mt-2 text-3xl font-bold leading-tight">Modern<br><span class="text-sky">Digital
-                      Products.</span></h2>
-                </div>
+        <p
+          class="text-sm font-bold uppercase tracking-[.3em] text-primary">
 
-                <div class="mt-12 grid grid-cols-2 gap-3">
-                  <div class="rounded-xl border border-white/10 bg-white/5 p-4">
-                    <div class="text-2xl font-bold">4+</div>
-                    <div class="mt-1 text-[11px] text-slate-300">Business Projects</div>
-                  </div>
-                  <div class="rounded-xl border border-white/10 bg-white/5 p-4">
-                    <div class="text-2xl font-bold">Web</div>
-                    <div class="mt-1 text-[11px] text-slate-300">+ Mobile Development</div>
-                  </div>
-                </div>
-              </div>
+          Full Stack Engineer
 
-              <div class="mt-4 flex items-center justify-between rounded-xl bg-pale px-4 py-3 text-xs">
-                <span class="font-semibold text-ink">Chennai, India</span>
-                <span class="text-blue">Full Stack Engineer</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </p>
 
-    <!-- MARQUEE -->
-    <section class="overflow-hidden border-y border-blue-100 bg-white py-5">
-      <div class="marquee gap-10 whitespace-nowrap text-sm font-semibold uppercase tracking-[.22em] text-slate-400">
-        <span>React Development ✦</span><span>React Native ✦</span><span>Expo CLI ✦</span>
-        <span>Next.js ✦</span><span>REST APIs ✦</span><span>Spring Boot ✦</span><span>MySQL ✦</span>
-        <span>React Development ✦</span><span>React Native ✦</span><span>Expo CLI ✦</span>
-        <span>Next.js ✦</span><span>REST APIs ✦</span><span>Spring Boot ✦</span><span>MySQL ✦</span>
-      </div>
-    </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="bg-white py-24 lg:py-32">
-      <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal grid gap-14 lg:grid-cols-[.7fr_1.3fr]">
-          <div>
-            <p class="text-xs font-bold uppercase tracking-[.25em] text-blue">About Me</p>
-            <h2 class="mt-4 text-4xl font-bold tracking-tight text-ink sm:text-5xl">Code with purpose.<br><span
-                class="text-blue">Design with clarity.</span></h2>
-          </div>
-          <div>
-            <p class="text-lg leading-8 text-slate-600">
-              I enjoy turning business requirements into useful, reliable software.
-              My work covers frontend interfaces, cross-platform mobile apps,
-              backend API integration and database-driven applications.
-            </p>
-            <p class="mt-5 text-base leading-8 text-slate-500">
-              I focus on reusable components, responsive layouts, clean application
-              structure and a smooth user experience. I am continuously improving my
-              skills in advanced React Native, backend development, cloud and modern
-              software engineering practices.
-            </p>
+        <h1
+          class="mt-5 max-w-4xl text-5xl font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
 
-            <div class="mt-8 grid gap-4 sm:grid-cols-3">
-              <div class="rounded-2xl border border-blue-100 bg-pale p-5">
-                <p class="text-2xl font-bold text-blue">01</p>
-                <p class="mt-2 text-xs font-semibold text-ink">Frontend</p>
-              </div>
-              <div class="rounded-2xl border border-blue-100 bg-pale p-5">
-                <p class="text-2xl font-bold text-blue">02</p>
-                <p class="mt-2 text-xs font-semibold text-ink">Mobile</p>
-              </div>
-              <div class="rounded-2xl border border-blue-100 bg-pale p-5">
-                <p class="text-2xl font-bold text-blue">03</p>
-                <p class="mt-2 text-xs font-semibold text-ink">Backend</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          Building
+          <span class="gradient-text">
+            modern digital
+          </span>
 
-    <!-- SKILLS -->
-    <section id="skills" class="bg-pale py-24 lg:py-32">
-      <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal mb-12 max-w-2xl">
-          <p class="text-xs font-bold uppercase tracking-[.25em] text-blue">Toolkit</p>
-          <h2 class="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">Technologies I work with.</h2>
-        </div>
+          experiences.
 
-        <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          <div class="hover-card reveal rounded-3xl border border-blue-100 bg-white p-7">
-            <span class="text-sm font-bold text-blue">01</span>
-            <h3 class="mt-4 text-xl font-bold">Frontend</h3>
-            <p class="mt-3 text-sm leading-7 text-slate-500">Modern interfaces and responsive web applications.</p>
-            <div class="mt-5 flex flex-wrap gap-2">
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">React.js</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">Next.js</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">JavaScript</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">TypeScript</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">Tailwind</span>
-            </div>
-          </div>
+        </h1>
 
-          <div class="hover-card reveal rounded-3xl border border-blue-100 bg-white p-7">
-            <span class="text-sm font-bold text-blue">02</span>
-            <h3 class="mt-4 text-xl font-bold">Mobile</h3>
-            <p class="mt-3 text-sm leading-7 text-slate-500">Cross-platform Android application development.</p>
-            <div class="mt-5 flex flex-wrap gap-2">
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">React Native</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">Expo CLI</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">Expo Router</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">Redux</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">Context API</span>
-            </div>
-          </div>
 
-          <div class="hover-card reveal rounded-3xl border border-blue-100 bg-white p-7">
-            <span class="text-sm font-bold text-blue">03</span>
-            <h3 class="mt-4 text-xl font-bold">Backend</h3>
-            <p class="mt-3 text-sm leading-7 text-slate-500">API-driven application and database development.</p>
-            <div class="mt-5 flex flex-wrap gap-2">
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">Java</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">Spring Boot</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">REST API</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">PHP MVC</span>
-              <span class="rounded-lg bg-pale px-3 py-1.5 text-xs font-medium">MySQL</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <p
+          class="mt-7 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="bg-white py-24 lg:py-32">
-      <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal mb-12">
-          <p class="text-xs font-bold uppercase tracking-[.25em] text-blue">Experience</p>
-          <h2 class="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">Professional journey.</h2>
-        </div>
+          I'm Bala Murugan, a Full Stack Engineer focused on
+          React Native, Expo, React.js and business applications.
+          I build clean, responsive and practical digital products
+          for real-world business needs.
 
-        <div class="max-w-4xl border-l-2 border-blue-100 pl-6 sm:pl-10">
-          <div class="reveal relative pb-12">
-            <span
-              class="absolute -left-[34px] top-1 h-4 w-4 rounded-full border-4 border-white bg-blue shadow-md sm:-left-[50px]"></span>
-            <p class="text-xs font-bold uppercase tracking-wider text-blue">Aug 2025 – Present</p>
-            <h3 class="mt-2 text-xl font-bold text-ink">Software Engineer — Mobile Developer</h3>
-            <p class="mt-1 text-sm font-semibold text-slate-500">ASkeyTech Solutions Pvt. Ltd.</p>
-            <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-500">React Native and Expo-based mobile application
-              development, API integration, state management and business application workflows.</p>
-          </div>
+        </p>
 
-          <div class="reveal relative pb-12">
-            <span
-              class="absolute -left-[34px] top-1 h-4 w-4 rounded-full border-4 border-white bg-sky shadow-md sm:-left-[50px]"></span>
-            <p class="text-xs font-bold uppercase tracking-wider text-blue">Nov 2024 – Jul 2025</p>
-            <h3 class="mt-2 text-xl font-bold text-ink">Front-End Developer</h3>
-            <p class="mt-1 text-sm font-semibold text-slate-500">Tritrix Technologies Pvt. Ltd.</p>
-            <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-500">React, Next.js and React Native development with
-              reusable UI components, responsive layouts and application integration.</p>
-          </div>
 
-          <div class="reveal relative">
-            <span
-              class="absolute -left-[34px] top-1 h-4 w-4 rounded-full border-4 border-white bg-blue shadow-md sm:-left-[50px]"></span>
-            <p class="text-xs font-bold uppercase tracking-wider text-blue">React Development</p>
-            <h3 class="mt-2 text-xl font-bold text-ink">React Developer / Internship Experience</h3>
-            <p class="mt-1 text-sm font-semibold text-slate-500">Zimro</p>
-            <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-500">Worked on React-based web interfaces and reusable
-              components for business applications.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+        <div
+          class="mt-9 flex flex-wrap gap-4">
 
-    <!-- PROJECTS -->
-    <div class="grid gap-5 md:grid-cols-2">
+          <a
+            href="#projects"
+            class="btn-primary rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-white">
 
-      <!-- 01 RightHMS -->
-      <article class="project-card hover-card reveal overflow-hidden rounded-3xl border border-white/10 bg-white/[.06]">
-        <div class="project-image bg-gradient-to-br from-blue/50 to-sky/20 p-7">
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <span>01 / WEB</span>
-            <span class="rounded-full bg-white/10 px-3 py-1">Live Project</span>
-          </div>
+            Explore My Work →
 
-          <div class="mt-10 rounded-2xl border border-white/10 bg-white p-5 text-ink shadow-2xl">
-            <div class="flex items-center justify-between border-b pb-3">
-              <strong>RightHMS</strong>
-              <span class="text-[10px] text-blue">Hospital Management</span>
-            </div>
-
-            <div class="mt-5 grid grid-cols-3 gap-2">
-              <div class="h-14 rounded-lg bg-pale"></div>
-              <div class="h-14 rounded-lg bg-blue/10"></div>
-              <div class="h-14 rounded-lg bg-sky/10"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-7">
-          <h3 class="text-2xl font-bold">RightHMS</h3>
-
-          <p class="mt-2 text-sm leading-7 text-slate-300">
-            Hospital management solution website with a clean,
-            professional and business-focused interface.
-          </p>
-
-          <a href="https://righthms.com" target="_blank" rel="noopener"
-            class="mt-5 inline-block text-sm font-semibold text-sky hover:text-white">
-            righthms.com ↗
           </a>
-        </div>
-      </article>
 
 
-      <!-- 02 Meddoz -->
-      <article class="project-card hover-card reveal overflow-hidden rounded-3xl border border-white/10 bg-white/[.06]">
-        <div class="project-image bg-gradient-to-br from-emerald-500/20 to-sky/20 p-7">
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <span>02 / WEB</span>
-            <span class="rounded-full bg-white/10 px-3 py-1">Live Project</span>
-          </div>
+          <a
+            href="#contact"
+            class="rounded-full border border-slate-300 bg-white px-7 py-3.5 text-sm font-bold text-slate-700 transition hover:border-primary hover:text-primary">
 
-          <div class="mt-10 rounded-2xl border border-white/10 bg-white p-5 text-ink shadow-2xl">
-            <div class="flex items-center justify-between border-b pb-3">
-              <strong>Meddoz</strong>
-              <span class="text-[10px] text-emerald-600">Pharmacy Software</span>
-            </div>
+            Let's Connect
 
-            <div class="mt-5 grid grid-cols-4 gap-2">
-              <div class="h-14 rounded-lg bg-emerald-50"></div>
-              <div class="h-14 rounded-lg bg-sky-50"></div>
-              <div class="h-14 rounded-lg bg-emerald-100"></div>
-              <div class="h-14 rounded-lg bg-blue-50"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-7">
-          <h3 class="text-2xl font-bold">Meddoz</h3>
-
-          <p class="mt-2 text-sm leading-7 text-slate-300">
-            Pharmacy billing and management software website
-            designed for a simple and user-friendly experience.
-          </p>
-
-          <a href="https://meddoz.com" target="_blank" rel="noopener"
-            class="mt-5 inline-block text-sm font-semibold text-sky hover:text-white">
-            meddoz.com ↗
           </a>
-        </div>
-      </article>
 
-
-      <!-- 03 Sri Ganesh Foods -->
-      <article class="project-card hover-card reveal overflow-hidden rounded-3xl border border-white/10 bg-white/[.06]">
-        <div class="project-image bg-gradient-to-br from-amber-400/20 to-blue/20 p-7">
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <span>03 / WEB</span>
-            <span class="rounded-full bg-white/10 px-3 py-1">Completed</span>
-          </div>
-
-          <div class="mt-10 rounded-2xl border border-white/10 bg-white p-5 text-ink shadow-2xl">
-            <div class="flex items-center justify-between border-b pb-3">
-              <strong>Sri Ganesh Foods</strong>
-              <span class="text-[10px] text-amber-700">Food & Catering</span>
-            </div>
-
-            <div class="mt-5 h-20 rounded-xl bg-gradient-to-r from-amber-50 to-orange-100"></div>
-          </div>
         </div>
 
-        <div class="p-7">
-          <h3 class="text-2xl font-bold">Sri Ganesh Foods</h3>
 
-          <p class="mt-2 text-sm leading-7 text-slate-300">
-            Responsive business website for an industrial catering
-            and food services client.
-          </p>
+        <div
+          class="mt-10 flex flex-wrap gap-6 text-sm text-slate-500">
 
-          <a href="https://sriganeshfoods.in" target="_blank" rel="noopener"
-            class="mt-5 inline-block text-sm font-semibold text-sky hover:text-white">
-            sriganeshfoods.in ↗
-          </a>
+          <span>
+            ✓ React Native
+          </span>
+
+          <span>
+            ✓ React.js
+          </span>
+
+          <span>
+            ✓ PHP MVC
+          </span>
+
+          <span>
+            ✓ MySQL
+          </span>
+
         </div>
-      </article>
+
+      </div>
 
 
-      <!-- 04 ASkeyCRM -->
-      <article class="project-card hover-card reveal overflow-hidden rounded-3xl border border-white/10 bg-white/[.06]">
 
-        <div class="project-image bg-gradient-to-br from-indigo-500/30 to-sky/20 p-7">
+      <!-- Hero visual -->
 
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <span>04 / WEB</span>
+      <div class="reveal relative">
 
-            <span class="rounded-full bg-blue px-3 py-1 text-white">
-              CRM
-            </span>
-          </div>
+        <div
+          class="float rounded-[2rem] border border-sky-100 bg-white p-5 shadow-blue">
 
-          <div class="mt-10 rounded-2xl border border-white/10 bg-white p-5 text-ink shadow-2xl">
+          <div
+            class="rounded-[1.5rem] bg-slate-950 p-5 text-white">
 
-            <div class="flex items-center justify-between border-b pb-3">
-              <strong>ASkeyCRM</strong>
+            <div
+              class="mb-5 flex items-center gap-2">
 
-              <span class="text-[10px] text-blue">
-                Business CRM
+              <span class="h-3 w-3 rounded-full bg-red-400"></span>
+              <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
+              <span class="h-3 w-3 rounded-full bg-green-400"></span>
+
+              <span class="ml-auto text-[10px] text-slate-500">
+                bala.dev
               </span>
-            </div>
-
-            <div class="mt-5 grid grid-cols-3 gap-2">
-              <div class="h-14 rounded-lg bg-blue/10"></div>
-              <div class="h-14 rounded-lg bg-indigo-100"></div>
-              <div class="h-14 rounded-lg bg-sky-100"></div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="p-7">
-
-          <h3 class="text-2xl font-bold">
-            ASkeyCRM
-          </h3>
-
-          <p class="mt-2 text-sm leading-7 text-slate-300">
-            CRM solution designed to help businesses manage
-            customers, leads, follow-ups and daily business activities.
-          </p>
-
-          <div class="mt-5 flex flex-wrap gap-2">
-            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">
-              CRM
-            </span>
-
-            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">
-              Web Application
-            </span>
-
-            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">
-              Business Software
-            </span>
-          </div>
-
-        </div>
-      </article>
-
-
-      <!-- 05 ASkeyRetail -->
-      <article class="project-card hover-card reveal overflow-hidden rounded-3xl border border-white/10 bg-white/[.06]">
-
-        <div class="project-image bg-gradient-to-br from-cyan-400/20 to-blue/30 p-7">
-
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <span>05 / MOBILE</span>
-
-            <span class="rounded-full bg-white/10 px-3 py-1">
-              React Native
-            </span>
-          </div>
-
-          <div class="mt-10 flex justify-center">
-
-            <div class="w-36 rounded-[2rem] border-4 border-slate-700 bg-white p-3 text-ink shadow-2xl">
-
-              <div class="mx-auto h-3 w-12 rounded-full bg-slate-200"></div>
-
-              <div class="mt-5 rounded-xl bg-pale p-4">
-
-                <strong class="text-sm">
-                  ASkeyRetail
-                </strong>
-
-                <div class="mt-4 space-y-2">
-                  <div class="h-5 rounded bg-blue/10"></div>
-                  <div class="h-5 rounded bg-sky/10"></div>
-                  <div class="h-5 rounded bg-blue/10"></div>
-                </div>
-
-              </div>
 
             </div>
 
-          </div>
-        </div>
 
-        <div class="p-7">
-
-          <h3 class="text-2xl font-bold">
-            ASkeyRetail
-          </h3>
-
-          <p class="mt-2 text-sm leading-7 text-slate-300">
-            Retail business mobile application built with
-            React Native and Expo, focused on retail workflows
-            and business operations.
-          </p>
-
-          <div class="mt-5 flex flex-wrap gap-2">
-            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">
-              React Native
-            </span>
-
-            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">
-              Expo
-            </span>
-
-            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">
-              Android
-            </span>
-          </div>
-
-        </div>
-      </article>
-
-
-      <!-- 06 RightKOT -->
-      <article class="project-card hover-card reveal overflow-hidden rounded-3xl border border-white/10 bg-white/[.06]">
-
-        <div class="project-image bg-gradient-to-br from-purple-500/20 to-sky/20 p-7">
-
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <span>06 / MOBILE</span>
-
-            <span class="rounded-full bg-white/10 px-3 py-1">
-              React Native
-            </span>
-          </div>
-
-          <div class="mt-10 flex justify-center">
-
-            <div class="w-36 rounded-[2rem] border-4 border-slate-700 bg-white p-3 text-ink shadow-2xl">
-
-              <div class="mx-auto h-3 w-12 rounded-full bg-slate-200"></div>
-
-              <div class="mt-5 rounded-xl bg-pale p-4">
-
-                <strong class="text-sm">
-                  RightKOT
-                </strong>
-
-                <div class="mt-4 space-y-2">
-                  <div class="h-5 rounded bg-blue/10"></div>
-                  <div class="h-5 rounded bg-sky/10"></div>
-                  <div class="h-5 rounded bg-blue/10"></div>
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-
-        <div class="p-7">
-
-          <h3 class="text-2xl font-bold">
-            RightKOT
-          </h3>
-
-          <p class="mt-2 text-sm leading-7 text-slate-300">
-            Kitchen order management application built with
-            React Native for restaurant and hotel operations.
-          </p>
-
-        </div>
-      </article>
-
-
-      <!-- 07 SmartSteno -->
-      <article class="project-card hover-card reveal overflow-hidden rounded-3xl border border-white/10 bg-white/[.06]">
-
-        <div class="project-image bg-gradient-to-br from-cyan-400/20 to-blue/20 p-7">
-
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <span>07 / WEB</span>
-
-            <span class="rounded-full bg-white/10 px-3 py-1">
-              Azure
-            </span>
-          </div>
-
-          <div class="mt-10 rounded-2xl border border-white/10 bg-white p-5 text-ink shadow-2xl">
-
-            <div class="flex items-center justify-between border-b pb-3">
-              <strong>SmartSteno</strong>
-
-              <span class="text-[10px] text-blue">
-                Learning Platform
-              </span>
-            </div>
-
-            <div class="mt-5 h-20 rounded-xl bg-gradient-to-r from-sky-50 to-blue-100"></div>
-
-          </div>
-        </div>
-
-        <div class="p-7">
-
-          <h3 class="text-2xl font-bold">
-            SmartSteno
-          </h3>
-
-          <p class="mt-2 text-sm leading-7 text-slate-300">
-            Online shorthand learning and typing practice platform.
-          </p>
-
-          <a href="https://smartsteno.azurewebsites.net" target="_blank" rel="noopener"
-            class="mt-5 inline-block text-sm font-semibold text-sky hover:text-white">
-            View project ↗
-          </a>
-
-        </div>
-      </article>
-
-
-      <!-- 08 Infuex -->
-      <article class="project-card hover-card reveal overflow-hidden rounded-3xl border border-white/10 bg-white/[.06]">
-
-        <div class="project-image bg-gradient-to-br from-pink-500/15 to-blue/20 p-7">
-
-          <div class="flex items-center justify-between text-xs font-semibold">
-            <span>08 / MOBILE</span>
-
-            <span class="rounded-full bg-white/10 px-3 py-1">
-              React Native
-            </span>
-          </div>
-
-          <div class="mt-10 rounded-2xl border border-white/10 bg-white p-5 text-ink shadow-2xl">
-
-            <div class="flex items-center justify-between border-b pb-3">
-              <strong>Infuex</strong>
-
-              <span class="text-[10px] text-blue">
-                Mobile Application
-              </span>
-            </div>
-
-            <div class="mt-5 grid grid-cols-2 gap-2">
-              <div class="h-16 rounded-lg bg-blue/10"></div>
-              <div class="h-16 rounded-lg bg-sky/10"></div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="p-7">
-
-          <h3 class="text-2xl font-bold">
-            Infuex
-          </h3>
-
-          <p class="mt-2 text-sm leading-7 text-slate-300">
-            React Native application involving wallet,
-            chat, onboarding and API-based features.
-          </p>
-
-        </div>
-      </article>
-
-
-      <!-- 09 WORK SMART CRM - OWN PRODUCT -->
-      <article
-        class="project-card hover-card reveal overflow-hidden rounded-3xl border border-sky/40 bg-gradient-to-br from-blue/20 via-white/[.08] to-sky/10">
-
-        <div class="project-image bg-gradient-to-br from-blue/40 to-sky/20 p-7">
-
-          <div class="flex items-center justify-between text-xs font-semibold">
-
-            <span>09 / MY PRODUCT</span>
-
-            <span class="rounded-full bg-sky px-3 py-1 text-ink">
-              SaaS
-            </span>
-
-          </div>
-
-          <div class="mt-10 rounded-2xl border border-white/20 bg-white p-5 text-ink shadow-2xl">
-
-            <div class="flex items-center justify-between border-b pb-3">
+            <div
+              class="space-y-3 font-mono text-xs leading-6">
 
               <div>
-                <strong>Work Smart CRM</strong>
-
-                <p class="mt-1 text-[9px] text-slate-400">
-                  Simple CRM for growing businesses
-                </p>
+                <span class="text-pink-400">const</span>
+                <span class="text-sky-300"> developer</span>
+                =
+                <span class="text-yellow-300">{</span>
               </div>
 
-              <span class="rounded-lg bg-blue px-2 py-1 text-[9px] font-bold text-white">
+              <div class="pl-5">
+                name:
+                <span class="text-green-300">
+                  "Bala Murugan"
+                </span>,
+              </div>
+
+              <div class="pl-5">
+                role:
+                <span class="text-green-300">
+                  "Full Stack Engineer"
+                </span>,
+              </div>
+
+              <div class="pl-5">
+                mobile:
+                <span class="text-green-300">
+                  "React Native"
+                </span>,
+              </div>
+
+              <div class="pl-5">
+                web:
+                <span class="text-green-300">
+                  "React.js"
+                </span>,
+              </div>
+
+              <div class="pl-5">
+                backend:
+                <span class="text-green-300">
+                  "PHP MVC"
+                </span>
+              </div>
+
+              <div>
+                <span class="text-yellow-300">}</span>;
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="absolute -bottom-6 -left-6 hidden rounded-2xl border border-sky-100 bg-white p-4 shadow-soft sm:block">
+
+          <p class="text-xs text-slate-400">
+            Experience
+          </p>
+
+          <p class="mt-1 text-xl font-extrabold text-primary">
+            2+ Years
+          </p>
+
+        </div>
+
+
+        <div
+          class="absolute -right-5 -top-5 hidden rounded-2xl border border-sky-100 bg-white p-4 shadow-soft sm:block">
+
+          <p class="text-xs text-slate-400">
+            Focus
+          </p>
+
+          <p class="mt-1 text-sm font-bold text-slate-800">
+            Web + Mobile
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       MARQUEE
+  ========================================== -->
+
+  <div
+    class="marquee border-y border-slate-100 bg-slate-50 py-5">
+
+    <div class="marquee-track">
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        REACT NATIVE
+      </span>
+
+      <span class="text-sky-400">✦</span>
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        EXPO CLI
+      </span>
+
+      <span class="text-sky-400">✦</span>
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        REACT.JS
+      </span>
+
+      <span class="text-sky-400">✦</span>
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        PHP MVC
+      </span>
+
+      <span class="text-sky-400">✦</span>
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        MYSQL
+      </span>
+
+      <span class="text-sky-400">✦</span>
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        REST API
+      </span>
+
+      <span class="text-sky-400">✦</span>
+
+
+      <!-- duplicate -->
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        REACT NATIVE
+      </span>
+
+      <span class="text-sky-400">✦</span>
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        EXPO CLI
+      </span>
+
+      <span class="text-sky-400">✦</span>
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        REACT.JS
+      </span>
+
+      <span class="text-sky-400">✦</span>
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        PHP MVC
+      </span>
+
+      <span class="text-sky-400">✦</span>
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        MYSQL
+      </span>
+
+      <span class="text-sky-400">✦</span>
+
+      <span class="mx-8 text-sm font-semibold text-slate-500">
+        REST API
+      </span>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================
+       ABOUT
+  ========================================== -->
+
+  <section
+    id="about"
+    class="bg-white py-24 lg:py-32">
+
+    <div
+      class="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-2 lg:px-8">
+
+
+      <div class="reveal">
+
+        <p
+          class="text-xs font-bold uppercase tracking-[.25em] text-primary">
+          About Me
+        </p>
+
+        <h2
+          class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
+
+          Developer focused on
+          <span class="gradient-text">
+            useful products.
+          </span>
+
+        </h2>
+
+      </div>
+
+
+      <div class="reveal">
+
+        <p
+          class="text-base leading-8 text-slate-600">
+
+          I'm Bala Murugan, a B.E. Computer Science and Engineering
+          graduate from Annamalai University. I work on web and
+          mobile applications with a focus on clean interfaces,
+          API integration and practical business solutions.
+
+        </p>
+
+        <p
+          class="mt-5 text-base leading-8 text-slate-600">
+
+          My experience includes React Native with Expo,
+          React.js, PHP MVC, MySQL and REST APIs. I enjoy
+          turning business requirements into simple and
+          maintainable software.
+
+        </p>
+
+
+        <div
+          class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
+
+          <div
+            class="rounded-2xl bg-soft p-5">
+
+            <p class="text-2xl font-extrabold text-primary">
+              2+
+            </p>
+
+            <p class="mt-1 text-xs text-slate-500">
+              Years Experience
+            </p>
+
+          </div>
+
+
+          <div
+            class="rounded-2xl bg-soft p-5">
+
+            <p class="text-2xl font-extrabold text-primary">
+              Web
+            </p>
+
+            <p class="mt-1 text-xs text-slate-500">
+              Development
+            </p>
+
+          </div>
+
+
+          <div
+            class="rounded-2xl bg-soft p-5">
+
+            <p class="text-2xl font-extrabold text-primary">
+              Mobile
+            </p>
+
+            <p class="mt-1 text-xs text-slate-500">
+              Development
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       SKILLS
+  ========================================== -->
+
+  <section
+    id="skills"
+    class="bg-slate-50 py-24 lg:py-32">
+
+    <div
+      class="mx-auto max-w-7xl px-5 lg:px-8">
+
+      <div class="reveal text-center">
+
+        <p
+          class="text-xs font-bold uppercase tracking-[.25em] text-primary">
+          Technologies
+        </p>
+
+        <h2
+          class="mt-3 text-4xl font-extrabold sm:text-5xl">
+
+          Tools I work with
+
+        </h2>
+
+      </div>
+
+
+      <div
+        class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
+
+        <div class="skill-card rounded-2xl border border-slate-200 bg-white p-6">
+
+          <p class="text-lg font-bold">
+            React Native
+          </p>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Cross-platform mobile application development with Expo.
+          </p>
+
+        </div>
+
+
+        <div class="skill-card rounded-2xl border border-slate-200 bg-white p-6">
+
+          <p class="text-lg font-bold">
+            React.js
+          </p>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Modern responsive web interfaces and business applications.
+          </p>
+
+        </div>
+
+
+        <div class="skill-card rounded-2xl border border-slate-200 bg-white p-6">
+
+          <p class="text-lg font-bold">
+            PHP MVC
+          </p>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Backend development using MVC architecture and APIs.
+          </p>
+
+        </div>
+
+
+        <div class="skill-card rounded-2xl border border-slate-200 bg-white p-6">
+
+          <p class="text-lg font-bold">
+            MySQL
+          </p>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Database design, queries and business data management.
+          </p>
+
+        </div>
+
+
+        <div class="skill-card rounded-2xl border border-slate-200 bg-white p-6">
+
+          <p class="text-lg font-bold">
+            REST APIs
+          </p>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            API integration and communication between applications.
+          </p>
+
+        </div>
+
+
+        <div class="skill-card rounded-2xl border border-slate-200 bg-white p-6">
+
+          <p class="text-lg font-bold">
+            JavaScript
+          </p>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            ES6+, asynchronous programming and application logic.
+          </p>
+
+        </div>
+
+
+        <div class="skill-card rounded-2xl border border-slate-200 bg-white p-6">
+
+          <p class="text-lg font-bold">
+            Git & GitHub
+          </p>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Version control and collaborative development workflows.
+          </p>
+
+        </div>
+
+
+        <div class="skill-card rounded-2xl border border-slate-200 bg-white p-6">
+
+          <p class="text-lg font-bold">
+            Bootstrap / Tailwind
+          </p>
+
+          <p class="mt-2 text-sm leading-6 text-slate-500">
+            Responsive and modern UI development.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       PROJECTS
+  ========================================== -->
+
+  <section
+    id="projects"
+    class="bg-white py-24 lg:py-32">
+
+    <div
+      class="mx-auto max-w-7xl px-5 lg:px-8">
+
+
+      <div
+        class="reveal mb-16 max-w-3xl">
+
+        <p
+          class="text-xs font-bold uppercase tracking-[.25em] text-primary">
+
+          Selected Projects
+
+        </p>
+
+        <h2
+          class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
+
+          Work that solves
+          <span class="gradient-text">
+            real problems.
+          </span>
+
+        </h2>
+
+        <p
+          class="mt-5 text-sm leading-7 text-slate-500">
+
+          A selection of web and mobile applications I've
+          worked on for businesses and product development.
+
+        </p>
+
+      </div>
+
+
+
+      <!-- PROJECT 1 -->
+
+      <article
+        class="project-showcase reveal mb-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50">
+
+        <div
+          class="grid items-center gap-10 p-6 md:p-10 lg:grid-cols-2">
+
+
+          <div>
+
+            <div class="flex items-center gap-3">
+
+              <span
+                class="rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-primary">
+
+                01 / WEB
+
+              </span>
+
+              <span class="text-xs text-slate-400">
+                Live Project
+              </span>
+
+            </div>
+
+
+            <h3
+              class="mt-5 text-3xl font-extrabold">
+
+              RightHMS
+
+            </h3>
+
+
+            <p
+              class="mt-4 text-sm leading-7 text-slate-600">
+
+              Hospital management solution website with a
+              clean and professional interface designed
+              for healthcare business operations.
+
+            </p>
+
+
+            <div
+              class="mt-6 flex flex-wrap gap-2">
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                Web
+              </span>
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                Responsive
+              </span>
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                Business
+              </span>
+
+            </div>
+
+
+            <a
+              href="https://righthms.com"
+              target="_blank"
+              rel="noopener"
+              class="btn-primary mt-7 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-bold text-white">
+
+              Visit RightHMS ↗
+
+            </a>
+
+          </div>
+
+
+          <div
+            class="project-window rounded-2xl bg-slate-900 p-4 shadow-blue">
+
+            <div class="rounded-xl bg-white p-5">
+
+              <div class="flex items-center justify-between border-b pb-4">
+
+                <strong>
+                  RightHMS
+                </strong>
+
+                <span class="text-xs text-primary">
+                  Hospital Management
+                </span>
+
+              </div>
+
+              <div class="mt-5 grid grid-cols-3 gap-3">
+
+                <div class="h-28 rounded-xl bg-blue-50"></div>
+                <div class="h-28 rounded-xl bg-sky-50"></div>
+                <div class="h-28 rounded-xl bg-indigo-50"></div>
+
+              </div>
+
+              <div class="mt-4 h-4 rounded bg-slate-100"></div>
+
+              <div class="mt-2 h-4 w-2/3 rounded bg-slate-100"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- PROJECT 2 -->
+
+      <article
+        class="project-showcase reveal mb-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50">
+
+        <div
+          class="grid items-center gap-10 p-6 md:p-10 lg:grid-cols-2">
+
+
+          <div
+            class="order-2 lg:order-1">
+
+            <div
+              class="project-window rounded-2xl bg-slate-900 p-4 shadow-blue">
+
+              <div class="rounded-xl bg-white p-5">
+
+                <div
+                  class="flex items-center justify-between border-b pb-4">
+
+                  <strong>
+                    Meddoz
+                  </strong>
+
+                  <span class="text-xs text-green-600">
+                    Pharmacy Software
+                  </span>
+
+                </div>
+
+                <div
+                  class="mt-5 grid grid-cols-4 gap-2">
+
+                  <div class="h-24 rounded-lg bg-green-50"></div>
+                  <div class="h-24 rounded-lg bg-sky-50"></div>
+                  <div class="h-24 rounded-lg bg-blue-50"></div>
+                  <div class="h-24 rounded-lg bg-indigo-50"></div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="order-1 lg:order-2">
+
+            <div class="flex items-center gap-3">
+
+              <span
+                class="rounded-full bg-green-100 px-3 py-1 text-xs font-bold text-green-700">
+
+                02 / WEB
+
+              </span>
+
+              <span class="text-xs text-slate-400">
+                Live Project
+              </span>
+
+            </div>
+
+
+            <h3
+              class="mt-5 text-3xl font-extrabold">
+              Meddoz
+            </h3>
+
+
+            <p
+              class="mt-4 text-sm leading-7 text-slate-600">
+
+              Pharmacy billing and management software
+              website designed to provide a clear and
+              simple business experience.
+
+            </p>
+
+
+            <div
+              class="mt-6 flex flex-wrap gap-2">
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                Pharmacy
+              </span>
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                Web
+              </span>
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                Business
+              </span>
+
+            </div>
+
+
+            <a
+              href="https://meddoz.com"
+              target="_blank"
+              rel="noopener"
+              class="btn-primary mt-7 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-bold text-white">
+
+              Visit Meddoz ↗
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- PROJECT 3 -->
+
+      <article
+        class="project-showcase reveal mb-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50">
+
+        <div
+          class="grid items-center gap-10 p-6 md:p-10 lg:grid-cols-2">
+
+
+          <div>
+
+            <div class="flex items-center gap-3">
+
+              <span
+                class="rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-700">
+
+                03 / WEB
+
+              </span>
+
+              <span class="text-xs text-slate-400">
+                Completed
+              </span>
+
+            </div>
+
+
+            <h3
+              class="mt-5 text-3xl font-extrabold">
+
+              Sri Ganesh Foods
+
+            </h3>
+
+
+            <p
+              class="mt-4 text-sm leading-7 text-slate-600">
+
+              Responsive business website created for an
+              industrial catering and food services client.
+
+            </p>
+
+
+            <a
+              href="https://sriganeshfoods.in"
+              target="_blank"
+              rel="noopener"
+              class="btn-primary mt-7 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-bold text-white">
+
+              Visit Website ↗
+
+            </a>
+
+          </div>
+
+
+          <div
+            class="project-window rounded-2xl bg-gradient-to-br from-orange-100 to-yellow-50 p-8 shadow-soft">
+
+            <div
+              class="rounded-2xl bg-white p-8 shadow">
+
+              <p class="text-xs font-bold uppercase text-orange-600">
+                Food & Catering
+              </p>
+
+              <h4 class="mt-3 text-2xl font-extrabold">
+                Sri Ganesh Foods
+              </h4>
+
+              <div
+                class="mt-6 h-24 rounded-xl bg-gradient-to-r from-orange-100 to-yellow-100">
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- PROJECT 4 -->
+
+      <article
+        class="project-showcase reveal mb-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50">
+
+        <div
+          class="grid items-center gap-10 p-6 md:p-10 lg:grid-cols-2">
+
+
+          <div
+            class="order-2 lg:order-1">
+
+            <div
+              class="project-window rounded-2xl bg-gradient-to-br from-indigo-100 to-sky-100 p-8">
+
+              <div
+                class="rounded-2xl bg-white p-7 shadow">
+
+                <p class="text-xs font-bold uppercase text-indigo-600">
+                  CRM
+                </p>
+
+                <h4 class="mt-3 text-2xl font-extrabold">
+                  ASkeyCRM
+                </h4>
+
+                <div
+                  class="mt-6 grid grid-cols-3 gap-3">
+
+                  <div class="h-20 rounded-xl bg-blue-50"></div>
+                  <div class="h-20 rounded-xl bg-indigo-50"></div>
+                  <div class="h-20 rounded-xl bg-sky-50"></div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="order-1 lg:order-2">
+
+            <span
+              class="rounded-full bg-indigo-100 px-3 py-1 text-xs font-bold text-indigo-700">
+
+              04 / WEB
+
+            </span>
+
+
+            <h3
+              class="mt-5 text-3xl font-extrabold">
+              ASkeyCRM
+            </h3>
+
+
+            <p
+              class="mt-4 text-sm leading-7 text-slate-600">
+
+              CRM and business management application
+              designed to help businesses manage customers,
+              leads and daily activities.
+
+            </p>
+
+
+            <div
+              class="mt-6 flex flex-wrap gap-2">
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
                 CRM
               </span>
 
-            </div>
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                Web Application
+              </span>
 
-            <div class="mt-5 grid grid-cols-3 gap-2">
-
-              <div class="rounded-lg bg-blue/10 p-3">
-                <div class="text-[9px] text-slate-400">Leads</div>
-                <div class="mt-1 font-bold text-blue">128</div>
-              </div>
-
-              <div class="rounded-lg bg-sky/10 p-3">
-                <div class="text-[9px] text-slate-400">Tasks</div>
-                <div class="mt-1 font-bold text-blue">42</div>
-              </div>
-
-              <div class="rounded-lg bg-blue/10 p-3">
-                <div class="text-[9px] text-slate-400">Sales</div>
-                <div class="mt-1 font-bold text-blue">86</div>
-              </div>
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                Business
+              </span>
 
             </div>
 
           </div>
-        </div>
-
-        <div class="p-7">
-
-          <div class="flex items-center gap-2">
-
-            <h3 class="text-2xl font-bold">
-              Work Smart CRM
-            </h3>
-
-            <span class="rounded-full bg-sky px-2 py-1 text-[9px] font-bold text-ink">
-              OWN PRODUCT
-            </span>
-
-          </div>
-
-          <p class="mt-3 text-sm leading-7 text-slate-200">
-            A simple CRM platform for small businesses to manage
-            leads, customers, products, quotations, tasks, tickets,
-            reports and daily business activities.
-          </p>
-
-          <div class="mt-5 flex flex-wrap gap-2">
-
-            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">
-              PHP MVC
-            </span>
-
-            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">
-              MySQL
-            </span>
-
-            <span class="rounded-full bg-white/10 px-3 py-1 text-xs">
-              SaaS
-            </span>
-
-          </div>
-
-          <a href="https://worksmartcrm.vercel.app" target="_blank" rel="noopener"
-            class="mt-6 inline-flex items-center gap-2 rounded-xl bg-sky px-5 py-3 text-sm font-bold text-ink transition hover:-translate-y-1 hover:bg-white">
-
-            Explore Work Smart CRM
-            <span>↗</span>
-
-          </a>
 
         </div>
+
       </article>
 
 
-      <!-- 10 WORK SMART CRM SUBSCRIPTION -->
-      <article class="project-card hover-card reveal overflow-hidden rounded-3xl border border-sky/40 bg-white/[.06]">
 
-        <div class="project-image bg-gradient-to-br from-sky/30 to-blue/30 p-7">
+      <!-- PROJECT 5 ASkeyRetail -->
 
-          <div class="flex items-center justify-between text-xs font-semibold">
+      <article
+        class="project-showcase reveal mb-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50">
 
-            <span>10 / SAAS</span>
+        <div
+          class="grid items-center gap-10 p-6 md:p-10 lg:grid-cols-2">
 
-            <span class="rounded-full bg-white px-3 py-1 text-blue">
-              Monthly Subscription
+
+          <div>
+
+            <span
+              class="rounded-full bg-cyan-100 px-3 py-1 text-xs font-bold text-cyan-700">
+
+              05 / MOBILE
+
             </span>
 
-          </div>
 
-          <div class="mt-10 rounded-2xl border border-white/10 bg-white p-6 text-ink shadow-2xl">
+            <h3
+              class="mt-5 text-3xl font-extrabold">
 
-            <p class="text-xs font-semibold uppercase tracking-wider text-blue">
-              Work Smart CRM
+              ASkeyRetail
+
+            </h3>
+
+
+            <p
+              class="mt-4 text-sm leading-7 text-slate-600">
+
+              Retail business mobile application built
+              with React Native and Expo for business
+              workflows and operations.
+
             </p>
 
-            <h4 class="mt-2 text-2xl font-bold">
-              Simple CRM Subscription
-            </h4>
 
-            <p class="mt-2 text-xs leading-5 text-slate-500">
-              Start managing your business with a simple
-              monthly CRM subscription.
-            </p>
+            <div
+              class="mt-6 flex flex-wrap gap-2">
 
-            <div class="mt-5 flex items-end gap-2">
-
-              <span class="text-3xl font-extrabold text-blue">
-                ₹
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                React Native
               </span>
 
-              <span class="text-sm text-slate-500">
-                / month
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                Expo
+              </span>
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                Android
               </span>
 
             </div>
 
-            <div class="mt-5 space-y-2 text-xs">
+          </div>
 
-              <div class="flex items-center gap-2">
-                <span class="text-blue">✓</span>
-                Lead Management
+
+          <div
+            class="flex justify-center">
+
+            <div
+              class="phone w-52 rounded-[2.5rem] border-8 border-slate-800 bg-white p-3 shadow-blue">
+
+              <div
+                class="mx-auto h-5 w-20 rounded-full bg-slate-800">
               </div>
 
-              <div class="flex items-center gap-2">
-                <span class="text-blue">✓</span>
-                Customer Management
-              </div>
+              <div
+                class="mt-5 rounded-2xl bg-sky-50 p-5">
 
-              <div class="flex items-center gap-2">
-                <span class="text-blue">✓</span>
-                Tasks & Tickets
-              </div>
+                <p class="text-xs font-bold text-primary">
+                  ASkeyRetail
+                </p>
 
-              <div class="flex items-center gap-2">
-                <span class="text-blue">✓</span>
-                Reports
+                <div class="mt-5 space-y-3">
+
+                  <div class="h-12 rounded-xl bg-white shadow-sm"></div>
+                  <div class="h-12 rounded-xl bg-white shadow-sm"></div>
+                  <div class="h-12 rounded-xl bg-white shadow-sm"></div>
+
+                </div>
+
               </div>
 
             </div>
 
           </div>
-        </div>
-
-        <div class="p-7">
-
-          <p class="text-xs font-bold uppercase tracking-wider text-sky">
-            Your Business CRM
-          </p>
-
-          <h3 class="mt-2 text-2xl font-bold">
-            Work Smart CRM
-          </h3>
-
-          <p class="mt-3 text-sm leading-7 text-slate-300">
-            Offer your customers an affordable monthly CRM
-            subscription to manage their business from one place.
-          </p>
-
-          <a href="https://worksmartcrm.vercel.app" target="_blank" rel="noopener"
-            class="mt-6 inline-flex items-center gap-2 rounded-xl border border-sky px-5 py-3 text-sm font-bold text-sky transition hover:-translate-y-1 hover:bg-sky hover:text-ink">
-
-            View Subscription
-            <span>→</span>
-
-          </a>
 
         </div>
+
+      </article>
+
+
+
+      <!-- PROJECT 6 RightKOT -->
+
+      <article
+        class="project-showcase reveal mb-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50">
+
+        <div
+          class="grid items-center gap-10 p-6 md:p-10 lg:grid-cols-2">
+
+
+          <div
+            class="order-2 lg:order-1 flex justify-center">
+
+            <div
+              class="phone w-52 rounded-[2.5rem] border-8 border-slate-800 bg-white p-3 shadow-blue">
+
+              <div
+                class="mx-auto h-5 w-20 rounded-full bg-slate-800">
+              </div>
+
+              <div
+                class="mt-5 rounded-2xl bg-indigo-50 p-5">
+
+                <p class="text-xs font-bold text-primary">
+                  RightKOT
+                </p>
+
+                <div class="mt-5 space-y-3">
+
+                  <div class="h-12 rounded-xl bg-white shadow-sm"></div>
+                  <div class="h-12 rounded-xl bg-white shadow-sm"></div>
+                  <div class="h-12 rounded-xl bg-white shadow-sm"></div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="order-1 lg:order-2">
+
+            <span
+              class="rounded-full bg-purple-100 px-3 py-1 text-xs font-bold text-purple-700">
+
+              06 / MOBILE
+
+            </span>
+
+
+            <h3
+              class="mt-5 text-3xl font-extrabold">
+
+              RightKOT
+
+            </h3>
+
+
+            <p
+              class="mt-4 text-sm leading-7 text-slate-600">
+
+              Kitchen order management mobile application
+              built with React Native for restaurant and
+              hotel operations.
+
+            </p>
+
+
+            <div
+              class="mt-6 flex flex-wrap gap-2">
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                React Native
+              </span>
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                Expo
+              </span>
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                API
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- PROJECT 7 SmartSteno -->
+
+      <article
+        class="project-showcase reveal mb-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50">
+
+        <div
+          class="grid items-center gap-10 p-6 md:p-10 lg:grid-cols-2">
+
+
+          <div>
+
+            <span
+              class="rounded-full bg-sky-100 px-3 py-1 text-xs font-bold text-primary">
+
+              07 / WEB
+
+            </span>
+
+
+            <h3
+              class="mt-5 text-3xl font-extrabold">
+
+              SmartSteno
+
+            </h3>
+
+
+            <p
+              class="mt-4 text-sm leading-7 text-slate-600">
+
+              Online shorthand learning and typing practice
+              platform designed for students and learners.
+
+            </p>
+
+
+            <a
+              href="https://smartsteno.azurewebsites.net"
+              target="_blank"
+              rel="noopener"
+              class="btn-primary mt-7 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-bold text-white">
+
+              View Project ↗
+
+            </a>
+
+          </div>
+
+
+          <div
+            class="project-window rounded-2xl bg-gradient-to-br from-sky-100 to-blue-100 p-8">
+
+            <div
+              class="rounded-2xl bg-white p-8 shadow">
+
+              <p class="text-xs font-bold uppercase text-primary">
+                Learning Platform
+              </p>
+
+              <h4 class="mt-3 text-2xl font-extrabold">
+                SmartSteno
+              </h4>
+
+              <div
+                class="mt-6 h-24 rounded-xl bg-gradient-to-r from-sky-50 to-blue-100">
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- PROJECT 8 Infuex -->
+
+      <article
+        class="project-showcase reveal overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50">
+
+        <div
+          class="grid items-center gap-10 p-6 md:p-10 lg:grid-cols-2">
+
+
+          <div
+            class="order-2 lg:order-1">
+
+            <div
+              class="project-window rounded-2xl bg-gradient-to-br from-pink-50 to-blue-50 p-8">
+
+              <div
+                class="rounded-2xl bg-white p-7 shadow">
+
+                <p class="text-xs font-bold uppercase text-primary">
+                  Mobile Application
+                </p>
+
+                <h4 class="mt-3 text-2xl font-extrabold">
+                  Infuex
+                </h4>
+
+                <div
+                  class="mt-6 grid grid-cols-2 gap-3">
+
+                  <div class="h-24 rounded-xl bg-blue-50"></div>
+                  <div class="h-24 rounded-xl bg-sky-50"></div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="order-1 lg:order-2">
+
+            <span
+              class="rounded-full bg-pink-100 px-3 py-1 text-xs font-bold text-pink-700">
+
+              08 / MOBILE
+
+            </span>
+
+
+            <h3
+              class="mt-5 text-3xl font-extrabold">
+              Infuex
+            </h3>
+
+
+            <p
+              class="mt-4 text-sm leading-7 text-slate-600">
+
+              React Native application involving wallet,
+              chat, onboarding and API-based application
+              features.
+
+            </p>
+
+
+            <div
+              class="mt-6 flex flex-wrap gap-2">
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                React Native
+              </span>
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                REST API
+              </span>
+
+              <span class="rounded-full bg-white px-3 py-1 text-xs">
+                WebSocket
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </article>
 
     </div>
 
-    <!-- CLIENT REVIEWS -->
-    <section id="reviews" class="overflow-hidden bg-pale py-24 lg:py-32">
-      <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal text-center">
-          <p class="text-xs font-bold uppercase tracking-[.25em] text-blue">Client Reviews</p>
-          <h2 class="mt-3 text-4xl font-bold tracking-tight text-ink sm:text-5xl">What clients say.</h2>
-          <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-500">
-            Add your real client feedback here. The review cards are ready for your testimonials.
-          </p>
-        </div>
+  </section>
 
-        <!-- Replace these sample texts with actual client quotes before publishing. -->
-        <div class="mt-12 grid gap-5 md:grid-cols-3">
-          <div class="hover-card reveal rounded-3xl border border-blue-100 bg-white p-7">
-            <div class="text-2xl text-blue">“</div>
-            <p class="mt-3 text-sm leading-7 text-slate-600">Professional communication, clean work and a smooth project
-              experience.</p>
-            <div class="mt-6 border-t border-blue-50 pt-5">
-              <p class="text-sm font-bold text-ink">Sri Ganesh Foods</p>
-              <p class="text-xs text-slate-400">Website Project</p>
-            </div>
-          </div>
 
-          <div class="hover-card reveal rounded-3xl border border-blue-100 bg-white p-7">
-            <div class="text-2xl text-blue">“</div>
-            <p class="mt-3 text-sm leading-7 text-slate-600">A clean and responsive website delivered with attention to
-              business requirements.</p>
-            <div class="mt-6 border-t border-blue-50 pt-5">
-              <p class="text-sm font-bold text-ink">RightHMS</p>
-              <p class="text-xs text-slate-400">Website Project</p>
-            </div>
-          </div>
 
-          <div class="hover-card reveal rounded-3xl border border-blue-100 bg-white p-7">
-            <div class="text-2xl text-blue">“</div>
-            <p class="mt-3 text-sm leading-7 text-slate-600">Simple, modern presentation with a user-friendly experience
-              across devices.</p>
-            <div class="mt-6 border-t border-blue-50 pt-5">
-              <p class="text-sm font-bold text-ink">Meddoz</p>
-              <p class="text-xs text-slate-400">Website Project</p>
-            </div>
-          </div>
-        </div>
+  <!-- =========================================
+       WORK SMART CRM
+  ========================================== -->
+
+  <section
+    id="product"
+    class="product-section overflow-hidden py-24 lg:py-32">
+
+    <div
+      class="mx-auto max-w-7xl px-5 lg:px-8">
+
+
+      <div
+        class="reveal text-center">
+
+        <span
+          class="rounded-full bg-primary px-4 py-2 text-xs font-bold text-white">
+
+          MY OWN PRODUCT
+
+        </span>
+
+
+        <h2
+          class="mt-6 text-4xl font-extrabold sm:text-6xl">
+
+          Work Smart
+          <span class="gradient-text">
+            CRM
+          </span>
+
+        </h2>
+
+
+        <p
+          class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600">
+
+          A simple CRM platform designed for small and
+          growing businesses to manage customers, leads,
+          quotations, tasks, tickets and daily activities
+          from one place.
+
+        </p>
+
       </div>
-    </section>
 
-    <!-- EDUCATION -->
-    <section class="bg-white py-24 lg:py-28">
-      <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal rounded-[2rem] border border-blue-100 bg-gradient-to-r from-pale to-white p-8 sm:p-10">
-          <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+
+
+      <div
+        class="mt-16 grid items-center gap-14 lg:grid-cols-2">
+
+
+        <!-- CRM dashboard -->
+
+        <div
+          class="reveal">
+
+          <div
+            class="rounded-[2rem] border border-sky-100 bg-white p-5 shadow-blue">
+
+            <div
+              class="rounded-2xl bg-slate-950 p-5">
+
+              <div
+                class="flex items-center justify-between">
+
+                <strong class="text-white">
+                  Work Smart CRM
+                </strong>
+
+                <span
+                  class="rounded-full bg-sky-400 px-3 py-1 text-[9px] font-bold text-slate-900">
+
+                  DASHBOARD
+
+                </span>
+
+              </div>
+
+
+              <div
+                class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+
+                <div
+                  class="rounded-xl bg-white/10 p-4">
+
+                  <p class="text-[10px] text-slate-400">
+                    Leads
+                  </p>
+
+                  <p class="mt-2 text-xl font-bold text-white">
+                    128
+                  </p>
+
+                </div>
+
+
+                <div
+                  class="rounded-xl bg-white/10 p-4">
+
+                  <p class="text-[10px] text-slate-400">
+                    Customers
+                  </p>
+
+                  <p class="mt-2 text-xl font-bold text-white">
+                    86
+                  </p>
+
+                </div>
+
+
+                <div
+                  class="rounded-xl bg-white/10 p-4">
+
+                  <p class="text-[10px] text-slate-400">
+                    Tasks
+                  </p>
+
+                  <p class="mt-2 text-xl font-bold text-white">
+                    42
+                  </p>
+
+                </div>
+
+
+                <div
+                  class="rounded-xl bg-white/10 p-4">
+
+                  <p class="text-[10px] text-slate-400">
+                    Tickets
+                  </p>
+
+                  <p class="mt-2 text-xl font-bold text-white">
+                    18
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <div
+                class="mt-4 h-32 rounded-xl bg-gradient-to-r from-blue-500/20 to-sky-400/20">
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Product information -->
+
+        <div class="reveal">
+
+          <p
+            class="text-xs font-bold uppercase tracking-[.25em] text-primary">
+
+            Built for businesses
+
+          </p>
+
+
+          <h3
+            class="mt-4 text-3xl font-extrabold sm:text-4xl">
+
+            Manage your business
+            <span class="gradient-text">
+              smarter.
+            </span>
+
+          </h3>
+
+
+          <p
+            class="mt-5 text-sm leading-7 text-slate-600">
+
+            Work Smart CRM brings important business
+            activities together in one simple platform.
+
+          </p>
+
+
+          <div
+            class="mt-8 grid gap-4 sm:grid-cols-2">
+
+            <div class="rounded-2xl bg-white p-5 shadow-sm">
+
+              <p class="font-bold">
+                Lead Management
+              </p>
+
+              <p class="mt-2 text-xs leading-5 text-slate-500">
+                Track and manage business leads.
+              </p>
+
+            </div>
+
+
+            <div class="rounded-2xl bg-white p-5 shadow-sm">
+
+              <p class="font-bold">
+                Customers
+              </p>
+
+              <p class="mt-2 text-xs leading-5 text-slate-500">
+                Keep customer information organized.
+              </p>
+
+            </div>
+
+
+            <div class="rounded-2xl bg-white p-5 shadow-sm">
+
+              <p class="font-bold">
+                Quotations
+              </p>
+
+              <p class="mt-2 text-xs leading-5 text-slate-500">
+                Create and manage quotations.
+              </p>
+
+            </div>
+
+
+            <div class="rounded-2xl bg-white p-5 shadow-sm">
+
+              <p class="font-bold">
+                Tasks & Tickets
+              </p>
+
+              <p class="mt-2 text-xs leading-5 text-slate-500">
+                Organize work and customer support.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <a
+            href="https://worksmartcrm.vercel.app"
+            target="_blank"
+            rel="noopener"
+            class="btn-primary mt-8 inline-flex rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-white">
+
+            Explore Work Smart CRM ↗
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       SUBSCRIPTION
+  ========================================== -->
+
+  <section
+    class="bg-slate-950 py-24 text-white">
+
+    <div
+      class="mx-auto max-w-5xl px-5 text-center lg:px-8">
+
+      <div class="reveal">
+
+        <p
+          class="text-xs font-bold uppercase tracking-[.25em] text-sky-400">
+
+          Monthly Subscription
+
+        </p>
+
+
+        <h2
+          class="mt-4 text-4xl font-extrabold sm:text-5xl">
+
+          Start with Work Smart CRM
+
+        </h2>
+
+
+        <p
+          class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-400">
+
+          A simple monthly CRM solution for businesses
+          that want to organize customers, leads and
+          daily operations.
+
+        </p>
+
+      </div>
+
+
+      <div
+        class="reveal mx-auto mt-12 max-w-md rounded-[2rem] border border-white/10 bg-white/[.06] p-8 text-left shadow-blue">
+
+        <div
+          class="flex items-center justify-between">
+
+          <div>
+
+            <p class="text-lg font-bold">
+              Work Smart CRM
+            </p>
+
+            <p class="mt-1 text-xs text-slate-400">
+              Business CRM
+            </p>
+
+          </div>
+
+
+          <span
+            class="rounded-full bg-sky-400 px-3 py-1 text-[10px] font-bold text-slate-950">
+
+            SAAS
+
+          </span>
+
+        </div>
+
+
+        <div
+          class="mt-8">
+
+          <span class="text-4xl font-extrabold">
+            ₹
+          </span>
+
+          <span class="text-sm text-slate-400">
+            / month
+          </span>
+
+        </div>
+
+
+        <p class="mt-2 text-xs text-slate-400">
+          Contact for current subscription pricing.
+        </p>
+
+
+        <div class="mt-7 space-y-4">
+
+          <div class="flex gap-3 text-sm">
+            <span class="text-sky-400">✓</span>
+            Lead Management
+          </div>
+
+          <div class="flex gap-3 text-sm">
+            <span class="text-sky-400">✓</span>
+            Customer Management
+          </div>
+
+          <div class="flex gap-3 text-sm">
+            <span class="text-sky-400">✓</span>
+            Products & Services
+          </div>
+
+          <div class="flex gap-3 text-sm">
+            <span class="text-sky-400">✓</span>
+            Quotations
+          </div>
+
+          <div class="flex gap-3 text-sm">
+            <span class="text-sky-400">✓</span>
+            Tasks & Tickets
+          </div>
+
+          <div class="flex gap-3 text-sm">
+            <span class="text-sky-400">✓</span>
+            Reports
+          </div>
+
+        </div>
+
+
+        <a
+          href="https://worksmartcrm.vercel.app"
+          target="_blank"
+          rel="noopener"
+          class="mt-8 block rounded-xl bg-sky-400 py-3 text-center text-sm font-bold text-slate-950 transition hover:bg-white">
+
+          View Work Smart CRM
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       CLIENT REVIEWS
+  ========================================== -->
+
+  <section
+    id="reviews"
+    class="overflow-hidden bg-white py-24 lg:py-32">
+
+    <div
+      class="mx-auto max-w-7xl px-5 lg:px-8">
+
+      <div
+        class="reveal text-center">
+
+        <p
+          class="text-xs font-bold uppercase tracking-[.25em] text-primary">
+
+          Client Reviews
+
+        </p>
+
+
+        <h2
+          class="mt-3 text-4xl font-extrabold sm:text-5xl">
+
+          What clients say
+
+        </h2>
+
+
+        <p
+          class="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-500">
+
+          A few examples of how project collaboration
+          can be presented on the portfolio.
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- Moving slider -->
+
+    <div
+      class="review-slider mt-14">
+
+      <div
+        class="review-track">
+
+
+        <!-- Review 1 -->
+
+        <article
+          class="review-card rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-soft">
+
+          <div
+            class="flex items-center justify-between">
+
             <div>
-              <p class="text-xs font-bold uppercase tracking-[.25em] text-blue">Education</p>
-              <h2 class="mt-3 text-2xl font-bold text-ink">B.E. Computer Science and Engineering</h2>
-              <p class="mt-2 text-sm text-slate-500">Annamalai University · 2019 – 2023 · OGPA 8.66</p>
-            </div>
-            <div class="rounded-2xl bg-white px-6 py-5 shadow-sm">
-              <p class="text-xs font-semibold text-slate-400">SPECIALIZATION</p>
-              <p class="mt-1 font-bold text-blue">Web & Mobile Development</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="bg-ink py-24 text-white lg:py-32">
-      <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal max-w-3xl">
-          <p class="text-xs font-bold uppercase tracking-[.25em] text-sky">Contact</p>
-          <h2 class="mt-4 text-4xl font-bold tracking-tight sm:text-6xl">Have a project in mind?</h2>
-          <p class="mt-6 text-base leading-8 text-slate-300">
-            Let's discuss your website, mobile application or software idea and turn it into a practical digital
-            solution.
+              <h3 class="font-bold">
+                Sri Ganesh Foods
+              </h3>
+
+              <p class="text-xs text-slate-400">
+                Business Website
+              </p>
+
+            </div>
+
+            <span class="text-sky-500">
+              ★★★★★
+            </span>
+
+          </div>
+
+
+          <p
+            class="mt-6 text-sm leading-7 text-slate-600">
+
+            “The website has a clean and professional
+            presentation and works well for our business.”
+
           </p>
-        </div>
 
-        <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <a href="mailto:snbalamurugan20@gmail.com"
-            class="hover-card rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p class="text-xs uppercase tracking-wider text-sky">Email</p>
-            <p class="mt-2 break-all text-sm font-semibold">snbalamurugan20@gmail.com</p>
-          </a>
-          <a href="tel:+919384902854" class="hover-card rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p class="text-xs uppercase tracking-wider text-sky">Phone</p>
-            <p class="mt-2 text-sm font-semibold">+91 93849 02854</p>
-          </a>
-          <a href="https://www.linkedin.com/in/bala-murugan-34a7bb244" target="_blank" rel="noopener"
-            class="hover-card rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p class="text-xs uppercase tracking-wider text-sky">LinkedIn</p>
-            <p class="mt-2 text-sm font-semibold">Connect with me ↗</p>
-          </a>
-        </div>
+        </article>
 
-        <div class="mt-12 border-t border-white/10 pt-8 text-xs text-slate-400">
-          <div class="flex flex-col justify-between gap-3 sm:flex-row">
-            <span>© 2026 Bala Murugan S N</span>
-            <span>Full Stack Engineer · React · React Native · Expo</span>
+
+
+        <!-- Review 2 -->
+
+        <article
+          class="review-card rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-soft">
+
+          <div
+            class="flex items-center justify-between">
+
+            <div>
+
+              <h3 class="font-bold">
+                RightHMS
+              </h3>
+
+              <p class="text-xs text-slate-400">
+                Web Project
+              </p>
+
+            </div>
+
+            <span class="text-sky-500">
+              ★★★★★
+            </span>
+
           </div>
-        </div>
+
+
+          <p
+            class="mt-6 text-sm leading-7 text-slate-600">
+
+            “Clean implementation with attention to
+            the project requirements and user experience.”
+
+          </p>
+
+        </article>
+
+
+
+        <!-- Review 3 -->
+
+        <article
+          class="review-card rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-soft">
+
+          <div
+            class="flex items-center justify-between">
+
+            <div>
+
+              <h3 class="font-bold">
+                Meddoz
+              </h3>
+
+              <p class="text-xs text-slate-400">
+                Business Website
+              </p>
+
+            </div>
+
+            <span class="text-sky-500">
+              ★★★★★
+            </span>
+
+          </div>
+
+
+          <p
+            class="mt-6 text-sm leading-7 text-slate-600">
+
+            “The project provides a simple and clear
+            experience for the business and its users.”
+
+          </p>
+
+        </article>
+
+
+
+        <!-- Review 4 -->
+
+        <article
+          class="review-card rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-soft">
+
+          <div
+            class="flex items-center justify-between">
+
+            <div>
+
+              <h3 class="font-bold">
+                Business Client
+              </h3>
+
+              <p class="text-xs text-slate-400">
+                Web Development
+              </p>
+
+            </div>
+
+            <span class="text-sky-500">
+              ★★★★★
+            </span>
+
+          </div>
+
+
+          <p
+            class="mt-6 text-sm leading-7 text-slate-600">
+
+            “Good communication, clean development and
+            a professional approach to the project.”
+
+          </p>
+
+        </article>
+
+
+
+        <!-- Duplicate for seamless animation -->
+
+
+        <article
+          class="review-card rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-soft">
+
+          <div class="flex items-center justify-between">
+
+            <div>
+
+              <h3 class="font-bold">
+                Sri Ganesh Foods
+              </h3>
+
+              <p class="text-xs text-slate-400">
+                Business Website
+              </p>
+
+            </div>
+
+            <span class="text-sky-500">
+              ★★★★★
+            </span>
+
+          </div>
+
+
+          <p
+            class="mt-6 text-sm leading-7 text-slate-600">
+
+            “The website has a clean and professional
+            presentation and works well for our business.”
+
+          </p>
+
+        </article>
+
+
+
+        <article
+          class="review-card rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-soft">
+
+          <div class="flex items-center justify-between">
+
+            <div>
+
+              <h3 class="font-bold">
+                RightHMS
+              </h3>
+
+              <p class="text-xs text-slate-400">
+                Web Project
+              </p>
+
+            </div>
+
+            <span class="text-sky-500">
+              ★★★★★
+            </span>
+
+          </div>
+
+
+          <p
+            class="mt-6 text-sm leading-7 text-slate-600">
+
+            “Clean implementation with attention to
+            the project requirements and user experience.”
+
+          </p>
+
+        </article>
+
+
+
+        <article
+          class="review-card rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-soft">
+
+          <div class="flex items-center justify-between">
+
+            <div>
+
+              <h3 class="font-bold">
+                Meddoz
+              </h3>
+
+              <p class="text-xs text-slate-400">
+                Business Website
+              </p>
+
+            </div>
+
+            <span class="text-sky-500">
+              ★★★★★
+            </span>
+
+          </div>
+
+
+          <p
+            class="mt-6 text-sm leading-7 text-slate-600">
+
+            “The project provides a simple and clear
+            experience for the business and its users.”
+
+          </p>
+
+        </article>
+
+
+
+        <article
+          class="review-card rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-soft">
+
+          <div class="flex items-center justify-between">
+
+            <div>
+
+              <h3 class="font-bold">
+                Business Client
+              </h3>
+
+              <p class="text-xs text-slate-400">
+                Web Development
+              </p>
+
+            </div>
+
+            <span class="text-sky-500">
+              ★★★★★
+            </span>
+
+          </div>
+
+
+          <p
+            class="mt-6 text-sm leading-7 text-slate-600">
+
+            “Good communication, clean development and
+            a professional approach to the project.”
+
+          </p>
+
+        </article>
+
+
       </div>
-    </section>
-  </main>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       EDUCATION / EXPERIENCE
+  ========================================== -->
+
+  <section
+    class="bg-slate-50 py-24 lg:py-32">
+
+    <div
+      class="mx-auto max-w-7xl px-5 lg:px-8">
+
+
+      <div
+        class="reveal mb-12">
+
+        <p
+          class="text-xs font-bold uppercase tracking-[.25em] text-primary">
+
+          Background
+
+        </p>
+
+        <h2
+          class="mt-3 text-4xl font-extrabold sm:text-5xl">
+
+          Education & Experience
+
+        </h2>
+
+      </div>
+
+
+      <div
+        class="grid gap-5 md:grid-cols-2">
+
+
+        <div
+          class="reveal rounded-3xl border border-slate-200 bg-white p-7">
+
+          <span
+            class="text-xs font-bold text-primary">
+            EDUCATION
+          </span>
+
+
+          <h3
+            class="mt-4 text-xl font-bold">
+
+            B.E. Computer Science & Engineering
+
+          </h3>
+
+
+          <p
+            class="mt-2 text-sm text-slate-500">
+
+            Annamalai University
+
+          </p>
+
+
+          <p
+            class="mt-4 text-sm text-slate-500">
+
+            2019 – 2023
+
+          </p>
+
+
+          <div
+            class="mt-5 inline-block rounded-full bg-sky-50 px-4 py-2 text-xs font-bold text-primary">
+
+            OGPA 8.66
+
+          </div>
+
+        </div>
+
+
+
+        <div
+          class="reveal rounded-3xl border border-slate-200 bg-white p-7">
+
+          <span
+            class="text-xs font-bold text-primary">
+            PROFESSIONAL
+          </span>
+
+
+          <h3
+            class="mt-4 text-xl font-bold">
+
+            Full Stack & Mobile Development
+
+          </h3>
+
+
+          <p
+            class="mt-2 text-sm leading-7 text-slate-500">
+
+            Experience working on web and mobile
+            applications using React Native,
+            React.js, PHP MVC and MySQL.
+
+          </p>
+
+
+          <div
+            class="mt-5 inline-block rounded-full bg-sky-50 px-4 py-2 text-xs font-bold text-primary">
+
+            2+ Years Experience
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       CONTACT
+  ========================================== -->
+
+  <section
+    id="contact"
+    class="bg-white py-24 lg:py-32">
+
+    <div
+      class="mx-auto max-w-5xl px-5 lg:px-8">
+
+
+      <div
+        class="reveal rounded-[2rem] bg-slate-950 p-8 text-center text-white shadow-blue sm:p-14">
+
+        <p
+          class="text-xs font-bold uppercase tracking-[.25em] text-sky-400">
+
+          Let's Work Together
+
+        </p>
+
+
+        <h2
+          class="mt-4 text-4xl font-extrabold sm:text-5xl">
+
+          Have a project
+          <span class="text-sky-400">
+            in mind?
+          </span>
+
+        </h2>
+
+
+        <p
+          class="mx-auto mt-5 max-w-xl text-sm leading-7 text-slate-400">
+
+          I'm open to development opportunities,
+          freelance projects and business applications.
+
+        </p>
+
+
+        <div
+          class="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+
+          <a
+            href="mailto:snbalamurugan20@gmail.com"
+            class="btn-primary rounded-full bg-sky-400 px-7 py-3.5 text-sm font-bold text-slate-950">
+
+            Email Me
+
+          </a>
+
+
+          <a
+            href="tel:+919384902854"
+            class="rounded-full border border-white/20 px-7 py-3.5 text-sm font-bold text-white transition hover:border-sky-400 hover:text-sky-400">
+
+            Call Me
+
+          </a>
+
+        </div>
+
+
+        <div
+          class="mt-10 grid gap-3 text-sm text-slate-400 sm:grid-cols-2">
+
+          <a
+            href="mailto:snbalamurugan20@gmail.com"
+            class="transition hover:text-sky-400">
+
+            snbalamurugan20@gmail.com
+
+          </a>
+
+
+          <a
+            href="tel:+919384902854"
+            class="transition hover:text-sky-400">
+
+            +91 93849 02854
+
+          </a>
+
+        </div>
+
+
+        <div
+          class="mt-8 flex justify-center gap-5">
+
+          <a
+            href="https://github.com/15balamurugan"
+            target="_blank"
+            rel="noopener"
+            class="text-sm font-semibold text-slate-400 transition hover:text-white">
+
+            GitHub
+
+          </a>
+
+
+          <a
+            href="https://www.linkedin.com/in/bala-murugan-34a7bb244"
+            target="_blank"
+            rel="noopener"
+            class="text-sm font-semibold text-slate-400 transition hover:text-white">
+
+            LinkedIn
+
+          </a>
+
+
+          <a
+            href="https://balamurugandev.vercel.app"
+            target="_blank"
+            rel="noopener"
+            class="text-sm font-semibold text-slate-400 transition hover:text-white">
+
+            Portfolio
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer
+    class="border-t border-slate-100 bg-white py-8">
+
+    <div
+      class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 text-center sm:flex-row lg:px-8">
+
+      <p
+        class="text-xs text-slate-400">
+
+        © 2026 Bala Murugan. All rights reserved.
+
+      </p>
+
+
+      <p
+        class="text-xs text-slate-400">
+
+        Full Stack Engineer · React Native · React.js
+
+      </p>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================== -->
 
   <script>
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-          observer.unobserve(entry.target);
+
+
+    /* ================================
+       NAVBAR SCROLL
+    ================================= */
+
+    const navbar =
+      document.getElementById("navbar");
+
+
+    window.addEventListener(
+      "scroll",
+      () => {
+
+        if (window.scrollY > 30) {
+
+          navbar.classList.add("scrolled");
+
+        } else {
+
+          navbar.classList.remove("scrolled");
+
         }
-      });
-    }, { threshold: 0.12 });
 
-    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+      }
+    );
 
-    // Gentle mouse-follow glow on interactive cards
-    document.querySelectorAll(".hover-card").forEach(card => {
-      card.addEventListener("mousemove", (e) => {
-        const r = card.getBoundingClientRect();
-        const x = e.clientX - r.left;
-        const y = e.clientY - r.top;
-        card.style.backgroundImage =
-          `radial-gradient(circle at ${x}px ${y}px, rgba(53,186,246,.08), transparent 38%)`;
-      });
-      card.addEventListener("mouseleave", () => {
-        card.style.backgroundImage = "";
-      });
-    });
+
+
+    /* ================================
+       MOBILE MENU
+    ================================= */
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const mobileMenu =
+      document.getElementById("mobileMenu");
+
+
+    menuButton.addEventListener(
+      "click",
+      () => {
+
+        mobileMenu.classList.toggle("hidden");
+
+      }
+    );
+
+
+    document
+      .querySelectorAll("#mobileMenu a")
+      .forEach(
+        link => {
+
+          link.addEventListener(
+            "click",
+            () => {
+
+              mobileMenu.classList.add("hidden");
+
+            }
+          );
+
+        }
+      );
+
+
+
+    /* ================================
+       SCROLL REVEAL
+    ================================= */
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+
+    const revealObserver =
+      new IntersectionObserver(
+
+        entries => {
+
+          entries.forEach(
+            entry => {
+
+              if (entry.isIntersecting) {
+
+                entry.target.classList.add("active");
+
+                revealObserver.unobserve(
+                  entry.target
+                );
+
+              }
+
+            }
+          );
+
+        },
+
+        {
+          threshold: 0.12
+        }
+
+      );
+
+
+    revealElements.forEach(
+      element => {
+
+        revealObserver.observe(element);
+
+      }
+    );
+
+
   </script>
+
+
 </body>
 
 </html>
