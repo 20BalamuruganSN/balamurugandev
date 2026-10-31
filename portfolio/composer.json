@@ -1,0 +1,7 @@
+{
+    "name": "bala/portfolio",
+    "description": "Bala Murugan Portfolio",
+    "require": {
+        "phpmailer/phpmailer": "^7.1"
+    }
+}
