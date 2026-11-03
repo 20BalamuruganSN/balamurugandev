@@ -1,734 +1,904 @@
 <?php
-require_once __DIR__ . '/../includes/functions.php';
+// index.php — redesigned responsive portfolio
+$request_uri = $_SERVER['REQUEST_URI'] ?? '/';
+$path = parse_url($request_uri, PHP_URL_PATH) ?: '/';
 
-$projects = [
-    [
-        'id' => '01',
-        'type' => 'WEB',
-        'name' => 'RightHMS',
-        'url' => 'https://righthms.com',
-        'desc' => 'Hospital management solution website with a clean and professional interface designed for healthcare business operations.',
-        'tags' => ['Web', 'Responsive', 'Business'],
-        'status' => 'Live Project',
-        'color' => 'blue'
-    ],
-    [
-        'id' => '02',
-        'type' => 'WEB',
-        'name' => 'Meddoz',
-        'url' => 'https://meddoz.com',
-        'desc' => 'Pharmacy billing and management software website designed to provide a clear and simple business experience.',
-        'tags' => ['Pharmacy', 'Web', 'Business'],
-        'status' => 'Live Project',
-        'color' => 'green'
-    ],
-    [
-        'id' => '03',
-        'type' => 'WEB',
-        'name' => 'Sri Ganesh Foods',
-        'url' => 'https://sriganeshfoods.in',
-        'desc' => 'Responsive business website created for an industrial catering and food services client.',
-        'tags' => ['Food', 'Catering', 'Responsive'],
-        'status' => 'Completed',
-        'color' => 'orange'
-    ],
-    [
-        'id' => '04',
-        'type' => 'WEB',
-        'name' => 'ASkeyCRM',
-        'url' => 'https://balamurugandev.vercel.app',
-        'desc' => 'CRM & business management application for customers, leads and daily activities.',
-        'tags' => ['CRM', 'Web App', 'Business'],
-        'status' => 'Live Project',
-        'color' => 'indigo'
-    ],
-    [
-        'id' => '05',
-        'type' => 'MOBILE',
-        'name' => 'ASkeyRetail',
-        'url' => 'https://balamurugandev.vercel.app',
-        'desc' => 'Retail business mobile application built with React Native and Expo for business workflows.',
-        'tags' => ['React Native', 'Expo', 'Android'],
-        'status' => 'Live Project',
-        'color' => 'cyan'
-    ],
-    [
-        'id' => '06',
-        'type' => 'MOBILE',
-        'name' => 'RightKOT',
-        'url' => 'https://balamurugandev.vercel.app',
-        'desc' => 'Kitchen order management mobile app for restaurants and hotels.',
-        'tags' => ['React Native', 'Expo', 'API'],
-        'status' => 'Live Project',
-        'color' => 'purple'
-    ],
-    [
-        'id' => '07',
-        'type' => 'WEB',
-        'name' => 'SmartSteno',
-        'url' => 'https://smartsteno.azurewebsites.net',
-        'desc' => 'Online shorthand learning and typing practice platform designed for students and learners.',
-        'tags' => ['Learning', 'Typing', 'Web'],
-        'status' => 'Live Project',
-        'color' => 'sky'
-    ],
-    [
-        'id' => '08',
-        'type' => 'MOBILE',
-        'name' => 'Infuex',
-        'url' => 'https://balamurugandev.vercel.app',
-        'desc' => 'React Native app with wallet, chat, onboarding and API-based application features.',
-        'tags' => ['React Native', 'REST API', 'WebSocket'],
-        'status' => 'Completed',
-        'color' => 'pink'
-    ],
-];
+// Serve static assets before rendering the page.
+if (preg_match('/\.(jpg|jpeg|png|gif|webp|css|js|svg|ico)$/i', $path)) {
+    $file_path = realpath(__DIR__ . '/../' . ltrim($path, '/'));
+    $asset_root = realpath(__DIR__ . '/..');
+    if ($file_path && $asset_root && str_starts_with($file_path, $asset_root . DIRECTORY_SEPARATOR) && is_file($file_path)) {
+        $mime = [
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'webp' => 'image/webp',
+            'css' => 'text/css',
+            'js' => 'application/javascript',
+            'svg' => 'image/svg+xml',
+            'ico' => 'image/x-icon'
+        ];
+        $ext = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
+        if (isset($mime[$ext]))
+            header('Content-Type: ' . $mime[$ext]);
+        readfile($file_path);
+        exit;
+    }
+    http_response_code(404);
+    exit('Asset not found');
+}
 
-include __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/../includes/header.php';
 ?>
 
-<!-- ═══════════════════ HERO ═══════════════════ -->
-<section id="home" class="grid-bg relative flex min-h-screen items-center overflow-hidden pt-24">
-    <div class="hero-glow left-[-150px] top-[100px]"></div>
-    <div class="hero-glow bottom-[-150px] right-[-100px]"></div>
+<style>
+    :root {
+        --ink: #101828;
+        --muted: #667085;
+        --brand: #635bff;
+        --brand2: #18b6a4;
+        --line: #e8eaf2;
+        --surface: #f7f8fc
+    }
 
-    <div class="mx-auto grid max-w-7xl items-center gap-14 px-5 py-20 lg:grid-cols-[1.2fr_.8fr] lg:px-8">
-        <div class="reveal">
-            <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2">
-                <span class="h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
-                <span class="text-xs font-semibold text-slate-600">Available for new opportunities</span>
-            </div>
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 90px
+    }
 
-            <p class="text-sm font-bold uppercase tracking-[.3em] text-primary">Full Stack Engineer</p>
+    body {
+        color: var(--ink);
+        background: #fff
+    }
 
-            <h1
-                class="mt-5 max-w-4xl text-5xl font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
-                Building <span class="gradient-text">modern digital</span> experiences.
-            </h1>
+    .portfolio {
+        overflow: hidden
+    }
 
-            <p class="mt-7 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-                I'm Bala Murugan, a Full Stack Engineer focused on React Native, Expo, React.js
-                and business applications. I build clean, responsive and practical digital
-                products for real-world business needs.
-            </p>
+    .p-wrap {
+        width: min(1160px, calc(100% - 40px));
+        margin-inline: auto
+    }
 
-            <div class="mt-9 flex flex-wrap gap-4">
-                <a href="#projects"
-                    class="btn-primary rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-white">
-                    Explore My Work →
-                </a>
-                <button onclick="openLeadForm('website')"
-                    class="rounded-full border border-slate-300 bg-white px-7 py-3.5 text-sm font-bold text-slate-700 transition hover:border-primary hover:text-primary">
-                    Start a Project
-                </button>
-            </div>
+    .p-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        color: var(--brand);
+        font-size: .74rem;
+        font-weight: 800;
+        letter-spacing: .16em;
+        text-transform: uppercase
+    }
 
-            <div class="mt-10 flex flex-wrap gap-6 text-sm text-slate-500">
-                <span>✓ React Native</span>
-                <span>✓ React.js</span>
-                <span>✓ PHP MVC</span>
-                <span>✓ MySQL</span>
-            </div>
-        </div>
+    .p-kicker:before {
+        content: "";
+        width: 24px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 4px
+    }
 
-        <div class="reveal relative">
-            <div class="float rounded-[2rem] border border-sky-100 bg-white p-5 shadow-blue">
-                <div class="rounded-[1.5rem] bg-slate-950 p-5 text-white">
-                    <div class="mb-5 flex items-center gap-2">
-                        <span class="h-3 w-3 rounded-full bg-red-400"></span>
-                        <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
-                        <span class="h-3 w-3 rounded-full bg-green-400"></span>
-                        <span class="ml-auto text-[10px] text-slate-500">bala.dev</span>
-                    </div>
-                    <div class="space-y-3 font-mono text-xs leading-6">
-                        <div><span class="text-pink-400">const</span> <span class="text-sky-300">developer</span> =
-                            <span class="text-yellow-300">{</span>
-                        </div>
-                        <div class="pl-5">name: <span class="text-green-300">"Bala Murugan"</span>,</div>
-                        <div class="pl-5">role: <span class="text-green-300">"Full Stack Engineer"</span>,</div>
-                        <div class="pl-5">mobile: <span class="text-green-300">"React Native"</span>,</div>
-                        <div class="pl-5">web: <span class="text-green-300">"React.js"</span>,</div>
-                        <div class="pl-5">backend: <span class="text-green-300">"PHP MVC"</span></div>
-                        <div><span class="text-yellow-300">}</span>;</div>
-                    </div>
+    .p-title {
+        font-size: clamp(2.1rem, 5vw, 3.7rem);
+        line-height: 1.06;
+        letter-spacing: -.055em;
+        font-weight: 850
+    }
+
+    .p-gradient {
+        background: linear-gradient(110deg, #635bff 10%, #14b8a6 90%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent
+    }
+
+    .p-muted {
+        color: var(--muted)
+    }
+
+    .p-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        padding: 13px 21px;
+        border-radius: 14px;
+        font-weight: 750;
+        font-size: .9rem;
+        transition: transform .2s, box-shadow .2s, background .2s
+    }
+
+    .p-btn:hover {
+        transform: translateY(-2px)
+    }
+
+    .p-btn-primary {
+        color: #fff;
+        background: linear-gradient(120deg, #635bff, #5148e8);
+        box-shadow: 0 10px 25px #635bff30
+    }
+
+    .p-btn-light {
+        background: #fff;
+        border: 1px solid var(--line);
+        color: #263044
+    }
+
+    .p-hero {
+        position: relative;
+        padding: 100px 0 84px;
+        background: radial-gradient(ellipse at 75% 10%, #e7eaff 0, transparent 35%), radial-gradient(ellipse at 10% 85%, #e5fbf7 0, transparent 28%), #fbfcff
+    }
+
+    .p-hero:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(#e8eaf5 1px, transparent 1px), linear-gradient(90deg, #e8eaf5 1px, transparent 1px);
+        background-size: 44px 44px;
+        opacity: .28;
+        mask-image: linear-gradient(to bottom, #000, transparent 90%);
+        pointer-events: none
+    }
+
+    .p-hero-grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1.12fr .88fr;
+        gap: 60px;
+        align-items: center
+    }
+
+    .p-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 9px 13px;
+        border: 1px solid #d9f4e8;
+        background: #f0fdf7;
+        color: #147d58;
+        border-radius: 999px;
+        font-size: .78rem;
+        font-weight: 700
+    }
+
+    .p-status i {
+        width: 7px;
+        height: 7px;
+        background: #20bf83;
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px #20bf8320
+    }
+
+    .p-hero h1 {
+        font-size: clamp(3rem, 6.6vw, 5.5rem);
+        line-height: .99;
+        letter-spacing: -.075em;
+        font-weight: 900;
+        margin: 25px 0
+    }
+
+    .p-hero-copy {
+        max-width: 590px;
+        color: #667085;
+        font-size: 1.04rem;
+        line-height: 1.85
+    }
+
+    .p-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-top: 25px
+    }
+
+    .p-tag {
+        padding: 8px 12px;
+        border: 1px solid #e4e7ef;
+        background: #ffffffbd;
+        border-radius: 10px;
+        font-size: .78rem;
+        font-weight: 650;
+        color: #475467
+    }
+
+    .p-code-card {
+        position: relative;
+        padding: 13px;
+        border: 1px solid #e7e9f3;
+        background: #fff;
+        border-radius: 26px;
+        box-shadow: 0 30px 80px #293b781b;
+        transform: rotate(1.5deg)
+    }
+
+    .p-code-inner {
+        background: #111827;
+        color: #e5e7eb;
+        border-radius: 18px;
+        padding: 25px;
+        min-height: 330px
+    }
+
+    .p-windowbar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ffffff14;
+        margin-bottom: 22px
+    }
+
+    .p-dot {
+        height: 9px;
+        width: 9px;
+        border-radius: 50%;
+        background: #fb7185
+    }
+
+    .p-dot:nth-child(2) {
+        background: #fbbf24
+    }
+
+    .p-dot:nth-child(3) {
+        background: #34d399
+    }
+
+    .p-code-label {
+        margin-left: auto;
+        color: #64748b;
+        font: 11px monospace
+    }
+
+    .p-code {
+        font: clamp(.72rem, 1.2vw, .84rem)/2.1 ui-monospace, SFMono-Regular, Menlo, monospace
+    }
+
+    .p-code .pink {
+        color: #f0abfc
+    }
+
+    .p-code .blue {
+        color: #7dd3fc
+    }
+
+    .p-code .green {
+        color: #86efac
+    }
+
+    .p-code .yellow {
+        color: #fde68a
+    }
+
+    .p-float-chip {
+        position: absolute;
+        right: -18px;
+        bottom: 28px;
+        background: #fff;
+        padding: 14px 17px;
+        border-radius: 16px;
+        box-shadow: 0 14px 35px #1018281a;
+        border: 1px solid var(--line);
+        font-size: .78rem;
+        font-weight: 750
+    }
+
+    .p-float-chip b {
+        color: var(--brand);
+        font-size: 1.1rem
+    }
+
+    .p-marquee {
+        overflow: hidden;
+        border-block: 1px solid var(--line);
+        background: #fff;
+        padding: 18px 0
+    }
+
+    .p-marquee-track {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        width: max-content;
+        animation: marquee 28s linear infinite
+    }
+
+    .p-marquee-track span {
+        font-size: .76rem;
+        font-weight: 800;
+        letter-spacing: .12em;
+        color: #98a2b3;
+        white-space: nowrap
+    }
+
+    .p-marquee-track em {
+        font-style: normal;
+        color: #635bff
+    }
+
+    @keyframes marquee {
+        to {
+            transform: translateX(-50%)
+        }
+    }
+
+    .p-section {
+        padding: 92px 0
+    }
+
+    .p-about-grid {
+        display: grid;
+        grid-template-columns: .8fr 1.2fr;
+        gap: 80px
+    }
+
+    .p-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 28px
+    }
+
+    .p-stat {
+        padding: 18px;
+        border-radius: 17px;
+        background: #f6f7ff;
+        border: 1px solid #eceeff
+    }
+
+    .p-stat strong {
+        display: block;
+        font-size: 1.55rem;
+        color: var(--brand);
+        letter-spacing: -.04em
+    }
+
+    .p-stat span {
+        font-size: .75rem;
+        color: var(--muted)
+    }
+
+    .p-skill-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-top: 38px
+    }
+
+    .p-skill {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: #fff;
+        transition: .25s
+    }
+
+    .p-skill:hover {
+        transform: translateY(-5px);
+        border-color: #c9c6ff;
+        box-shadow: 0 18px 45px #635bff12
+    }
+
+    .p-skill-icon {
+        display: grid;
+        place-items: center;
+        width: 43px;
+        height: 43px;
+        border-radius: 13px;
+        background: #f0efff;
+        color: var(--brand);
+        font-size: 1.2rem;
+        font-weight: 900;
+        margin-bottom: 20px
+    }
+
+    .p-skill h3 {
+        font-size: 1rem;
+        font-weight: 800
+    }
+
+    .p-skill p {
+        font-size: .83rem;
+        line-height: 1.7;
+        color: var(--muted);
+        margin-top: 8px
+    }
+
+    .p-project {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 42px;
+        align-items: center;
+        padding: 30px;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: linear-gradient(135deg, #fafbff, #f5f7ff);
+        margin-top: 22px
+    }
+
+    .p-project:nth-of-type(even) {
+        background: linear-gradient(135deg, #f5fffc, #f7fbff)
+    }
+
+    .p-project-copy {
+        padding: 10px
+    }
+
+    .p-project-meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: .75rem;
+        color: #8b95a7;
+        font-weight: 700
+    }
+
+    .p-project-number {
+        background: #e9e8ff;
+        color: #5b52ed;
+        border-radius: 8px;
+        padding: 6px 9px
+    }
+
+    .p-project h3 {
+        font-size: 2rem;
+        font-weight: 850;
+        letter-spacing: -.04em;
+        margin: 17px 0 10px
+    }
+
+    .p-project p {
+        color: var(--muted);
+        font-size: .9rem;
+        line-height: 1.8
+    }
+
+    .p-project-shot {
+        padding: 10px;
+        background: #111827;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px #17213a20;
+        overflow: hidden
+    }
+
+    .p-project-shot img {
+        width: 100%;
+        height: auto;
+        min-height: 220px;
+        max-height: 390px;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 12px;
+        display: block
+    }
+
+    .p-project-shot img[src=""] {
+        display: none
+    }
+
+    .p-product {
+        background: radial-gradient(ellipse at 15% 20%, #e9eaff, transparent 35%), #f8f9ff
+    }
+
+    .p-product-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        margin-top: 55px
+    }
+
+    .p-crm-frame {
+        padding: 13px;
+        background: #fff;
+        border: 1px solid #e3e7f2;
+        border-radius: 24px;
+        box-shadow: 0 28px 70px #243a7a18
+    }
+
+    .p-crm-frame img {
+        width: 100%;
+        display: block;
+        border-radius: 14px
+    }
+
+    .p-feature {
+        display: flex;
+        gap: 13px;
+        padding: 15px;
+        border: 1px solid #e8eaf4;
+        background: #ffffffc9;
+        border-radius: 15px
+    }
+
+    .p-feature-icon {
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: #eeedff;
+        color: #6258f5;
+        font-weight: 900
+    }
+
+    .p-feature strong {
+        font-size: .88rem
+    }
+
+    .p-feature p {
+        font-size: .78rem;
+        color: var(--muted);
+        margin-top: 4px
+    }
+
+    .p-contact {
+        padding: 65px 25px;
+        text-align: center;
+        border-radius: 30px;
+        background: linear-gradient(125deg, #111827, #20294a);
+        color: #fff;
+        position: relative;
+        overflow: hidden
+    }
+
+    .p-contact:before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: #635bff55;
+        filter: blur(70px);
+        top: -150px;
+        left: 15%
+    }
+
+    .p-contact>* {
+        position: relative
+    }
+
+    .p-contact p {
+        color: #b6bfd0;
+        max-width: 550px;
+        margin: 15px auto 0;
+        line-height: 1.8
+    }
+
+    .p-contact-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 28px
+    }
+
+    .p-contact .p-btn-light {
+        background: #ffffff12;
+        border-color: #ffffff30;
+        color: #fff
+    }
+
+    @media(max-width:900px) {
+        .p-hero-grid {
+            grid-template-columns: 1fr;
+            gap: 45px
+        }
+
+        .p-code-card {
+            max-width: 520px;
+            margin: auto
+        }
+
+        .p-about-grid {
+            grid-template-columns: 1fr;
+            gap: 25px
+        }
+
+        .p-skill-grid {
+            grid-template-columns: repeat(2, 1fr)
+        }
+
+        .p-project,
+        .p-product-grid {
+            grid-template-columns: 1fr;
+            gap: 25px
+        }
+
+        .p-project-shot {
+            order: 0
+        }
+
+        .p-project-copy {
+            order: 1
+        }
+
+        .p-project:nth-of-type(odd) .p-project-shot {
+            order: 0
+        }
+
+        .p-project:nth-of-type(odd) .p-project-copy {
+            order: 1
+        }
+    }
+
+    @media(max-width:560px) {
+        .p-wrap {
+            width: min(100% - 28px, 1160px)
+        }
+
+        .p-hero {
+            padding: 75px 0 60px
+        }
+
+        .p-hero h1 {
+            font-size: clamp(2.7rem, 13vw, 4rem)
+        }
+
+        .p-section {
+            padding: 65px 0
+        }
+
+        .p-skill-grid {
+            gap: 10px
+        }
+
+        .p-skill {
+            padding: 17px
+        }
+
+        .p-stats {
+            gap: 8px
+        }
+
+        .p-stat {
+            padding: 13px 10px
+        }
+
+        .p-stat strong {
+            font-size: 1.25rem
+        }
+
+        .p-project {
+            padding: 15px;
+            border-radius: 22px
+        }
+
+        .p-project h3 {
+            font-size: 1.65rem
+        }
+
+        .p-code-inner {
+            padding: 18px;
+            min-height: 280px
+        }
+
+        .p-float-chip {
+            right: 0
+        }
+
+        .p-contact {
+            padding: 48px 18px
+        }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+        *,
+        *:before,
+        *:after {
+            animation: none !important;
+            scroll-behavior: auto !important;
+            transition: none !important
+        }
+    }
+</style>
+
+<main class="portfolio">
+    <section id="home" class="p-hero">
+        <div class="p-wrap p-hero-grid">
+            <div>
+                <div class="p-status"><i></i> Available for opportunities</div>
+                <p class="p-kicker" style="margin-top:25px">Full Stack Engineer</p>
+                <h1>Building <span class="p-gradient">digital products</span><br>that work.</h1>
+                <p class="p-hero-copy">I'm Bala Murugan — a Full Stack Engineer and React Native Developer building
+                    responsive web experiences, Android apps, and practical business software.</p>
+                <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px">
+                    <a class="p-btn p-btn-primary" href="#projects">Explore projects <span>↗</span></a>
+                    <button class="p-btn p-btn-light" type="button" onclick="openSubscriptionModal()">Let's talk
+                        <span>→</span></button>
+                </div>
+                <div class="p-tags"><span class="p-tag">React Native</span><span class="p-tag">React.js</span><span
+                        class="p-tag">PHP MVC</span><span class="p-tag">MySQL</span><span class="p-tag">REST APIs</span>
                 </div>
             </div>
-
-            <div
-                class="absolute -bottom-6 -left-6 hidden rounded-2xl border border-sky-100 bg-white p-4 shadow-soft sm:block">
-                <p class="text-xs text-slate-400">Experience</p>
-                <p class="mt-1 text-xl font-extrabold text-primary">2+ Years</p>
+            <div class="p-code-card">
+                <div class="p-code-inner">
+                    <div class="p-windowbar"><i class="p-dot"></i><i class="p-dot"></i><i class="p-dot"></i><span
+                            class="p-code-label">bala.dev / profile.js</span></div>
+                    <div class="p-code">
+                        <div><span class="pink">const</span> <span class="blue">developer</span> = <span
+                                class="yellow">{</span></div>
+                        <div style="padding-left:20px">name: <span class="green">"Bala Murugan"</span>,</div>
+                        <div style="padding-left:20px">role: <span class="green">"Full Stack Engineer"</span>,</div>
+                        <div style="padding-left:20px">mobile: <span class="green">"React Native + Expo"</span>,</div>
+                        <div style="padding-left:20px">web: <span class="green">"React.js"</span>,</div>
+                        <div style="padding-left:20px">backend: <span class="green">"PHP MVC"</span>,</div>
+                        <div style="padding-left:20px">database: <span class="green">"MySQL"</span></div>
+                        <div><span class="yellow">}</span>;</div>
+                        <div style="margin-top:18px;color:#64748b">// Turning ideas into useful software ✨</div>
+                    </div>
+                </div>
+                <div class="p-float-chip"><b>2.5+</b><br>Years building</div>
             </div>
+        </div>
+    </section>
 
-            <div
-                class="absolute -right-5 -top-5 hidden rounded-2xl border border-sky-100 bg-white p-4 shadow-soft sm:block">
-                <p class="text-xs text-slate-400">Focus</p>
-                <p class="mt-1 text-sm font-bold text-slate-800">Web + Mobile</p>
-            </div>
+    <div class="p-marquee" aria-label="Technology stack">
+        <div class="p-marquee-track">
+            <span>REACT NATIVE <em>✦</em></span><span>EXPO <em>✦</em></span><span>REACT.JS <em>✦</em></span><span>PHP
+                MVC <em>✦</em></span><span>MYSQL <em>✦</em></span><span>REST API <em>✦</em></span>
+            <span>REACT NATIVE <em>✦</em></span><span>EXPO <em>✦</em></span><span>REACT.JS <em>✦</em></span><span>PHP
+                MVC <em>✦</em></span><span>MYSQL <em>✦</em></span><span>REST API <em>✦</em></span>
         </div>
     </div>
-</section>
 
-<!-- MARQUEE -->
-<div class="marquee border-y border-slate-100 bg-slate-50 py-5">
-    <div class="marquee-track">
-        <?php foreach (['REACT NATIVE', 'EXPO CLI', 'REACT.JS', 'PHP MVC', 'MYSQL', 'REST API', 'REACT NATIVE', 'EXPO CLI', 'REACT.JS', 'PHP MVC', 'MYSQL', 'REST API'] as $i => $word): ?>
-            <span class="mx-8 text-sm font-semibold text-slate-500"><?= $word ?></span>
-            <?php if ($i % 6 !== 5): ?><span class="text-sky-400">✦</span><?php endif; ?>
-        <?php endforeach; ?>
-    </div>
-</div>
-
-<!-- ═══════════════════ ABOUT ═══════════════════ -->
-<section id="about" class="bg-white py-24 lg:py-32">
-    <div class="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-2 lg:px-8">
-        <div class="reveal">
-            <p class="text-xs font-bold uppercase tracking-[.25em] text-primary">About Me</p>
-            <h2 class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
-                Developer focused on <span class="gradient-text">useful products.</span>
-            </h2>
-        </div>
-        <div class="reveal">
-            <p class="text-base leading-8 text-slate-600">
-                I'm Bala Murugan, a B.E. Computer Science and Engineering graduate from Annamalai University.
-                I work on web and mobile applications with a focus on clean interfaces, API integration
-                and practical business solutions.
-            </p>
-            <p class="mt-5 text-base leading-8 text-slate-600">
-                My experience includes React Native with Expo, React.js, PHP MVC, MySQL and REST APIs.
-                I enjoy turning business requirements into simple and maintainable software.
-            </p>
-            <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
-                <div class="rounded-2xl bg-soft p-5">
-                    <p class="text-2xl font-extrabold text-primary">2+</p>
-                    <p class="mt-1 text-xs text-slate-500">Years Experience</p>
-                </div>
-                <div class="rounded-2xl bg-soft p-5">
-                    <p class="text-2xl font-extrabold text-primary">Web</p>
-                    <p class="mt-1 text-xs text-slate-500">Development</p>
-                </div>
-                <div class="rounded-2xl bg-soft p-5">
-                    <p class="text-2xl font-extrabold text-primary">Mobile</p>
-                    <p class="mt-1 text-xs text-slate-500">Development</p>
+    <section id="about" class="p-section">
+        <div class="p-wrap p-about-grid">
+            <div>
+                <p class="p-kicker">About me</p>
+                <h2 class="p-title" style="margin-top:15px">Developer focused on <span class="p-gradient">useful
+                        products.</span></h2>
+            </div>
+            <div>
+                <p class="p-muted" style="font-size:1rem;line-height:1.9">I'm Bala Murugan, a Computer Science and
+                    Engineering graduate from Annamalai University. I build web and Android applications with an
+                    emphasis on clean interfaces, reliable API integration, and practical business workflows.</p>
+                <p class="p-muted" style="font-size:1rem;line-height:1.9;margin-top:15px">My experience includes React
+                    Native with Expo, React.js, PHP MVC, MySQL, and REST APIs. I enjoy translating business requirements
+                    into simple, maintainable software.</p>
+                <div class="p-stats">
+                    <div class="p-stat"><strong>2.5+</strong><span>Years experience</span></div>
+                    <div class="p-stat"><strong>Web</strong><span>Development</span></div>
+                    <div class="p-stat"><strong>Android</strong><span>Applications</span></div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ═══════════════════ SKILLS ═══════════════════ -->
-<section id="skills" class="bg-slate-50 py-24 lg:py-32">
-    <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal text-center">
-            <p class="text-xs font-bold uppercase tracking-[.25em] text-primary">Technologies</p>
-            <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">Tools I work with</h2>
+    <section id="skills" class="p-section" style="background:var(--surface)">
+        <div class="p-wrap">
+            <div style="text-align:center">
+                <p class="p-kicker">My toolkit</p>
+                <h2 class="p-title" style="margin-top:15px">Technologies I work with</h2>
+                <p class="p-muted" style="margin-top:12px">A practical stack for building and shipping products.</p>
+            </div>
+            <div class="p-skill-grid">
+                <article class="p-skill">
+                    <div class="p-skill-icon">R</div>
+                    <h3>React Native</h3>
+                    <p>Android app development with Expo and modern React Native workflows.</p>
+                </article>
+                <article class="p-skill">
+                    <div class="p-skill-icon">⚛</div>
+                    <h3>React.js</h3>
+                    <p>Responsive web interfaces and interactive business applications.</p>
+                </article>
+                <article class="p-skill">
+                    <div class="p-skill-icon">PHP</div>
+                    <h3>PHP MVC</h3>
+                    <p>Backend development, structured architecture, and API integration.</p>
+                </article>
+                <article class="p-skill">
+                    <div class="p-skill-icon">DB</div>
+                    <h3>MySQL</h3>
+                    <p>Database design, SQL queries, and business data management.</p>
+                </article>
+            </div>
         </div>
+    </section>
 
-        <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <?php
-            $skills = [
-                ['React Native', 'Cross-platform mobile app development with Expo.'],
-                ['React.js', 'Modern responsive web interfaces and business apps.'],
-                ['PHP MVC', 'Backend development using MVC architecture and APIs.'],
-                ['MySQL', 'Database design, queries and business data management.'],
-                ['REST APIs', 'API integration and communication between apps.'],
-                ['JavaScript', 'ES6+, asynchronous programming and app logic.'],
-                ['Git & GitHub', 'Version control and collaborative workflows.'],
-                ['Bootstrap / Tailwind', 'Responsive and modern UI development.'],
-            ];
-            foreach ($skills as $s): ?>
-                <div class="skill-card rounded-2xl border border-slate-200 bg-white p-6">
-                    <p class="text-lg font-bold"><?= $s[0] ?></p>
-                    <p class="mt-2 text-sm leading-6 text-slate-500"><?= $s[1] ?></p>
+    <section id="projects" class="p-section">
+        <div class="p-wrap">
+            <p class="p-kicker">Selected work</p>
+            <h2 class="p-title" style="margin-top:15px;max-width:700px">Projects built to solve <span
+                    class="p-gradient">real problems.</span></h2>
+            <article class="p-project">
+                <div class="p-project-copy">
+                    <div class="p-project-meta"><span class="p-project-number">01 / WEB</span><span>Live project</span>
+                    </div>
+                    <h3>RightHMS</h3>
+                    <p>Hotel and restaurant management solution designed around day-to-day hospitality operations, with
+                        a clean and professional product experience.</p>
+                    <div class="p-tags"><span class="p-tag">Web</span><span class="p-tag">Responsive UI</span><span
+                            class="p-tag">Hospitality</span></div><a class="p-btn p-btn-primary" style="margin-top:23px"
+                        href="https://righthms.com" target="_blank" rel="noopener">Visit RightHMS ↗</a>
                 </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════ PROJECTS ═══════════════════ -->
-<section id="projects" class="bg-white py-24 lg:py-32">
-    <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal mb-16 max-w-3xl">
-            <p class="text-xs font-bold uppercase tracking-[.25em] text-primary">Selected Projects</p>
-            <h2 class="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
-                Work that solves <span class="gradient-text">real problems.</span>
-            </h2>
-            <p class="mt-5 text-sm leading-7 text-slate-500">
-                Live previews pulled directly from each project's URL.
-            </p>
-        </div>
-
-        <?php foreach ($projects as $p): ?>
-            <article
-                class="project-showcase reveal mb-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50">
-                <div class="grid items-center gap-10 p-6 md:p-10 lg:grid-cols-2">
-                    <div>
-                        <div class="flex items-center gap-3">
-                            <span
-                                class="rounded-full bg-<?= $p['color'] ?>-100 px-3 py-1 text-xs font-bold text-<?= $p['color'] ?>-700">
-                                <?= $p['id'] ?> / <?= $p['type'] ?>
-                            </span>
-                            <span class="text-xs text-slate-400"><?= $p['status'] ?></span>
-                        </div>
-
-                        <h3 class="mt-5 text-3xl font-extrabold"><?= htmlspecialchars($p['name']) ?></h3>
-                        <p class="mt-4 text-sm leading-7 text-slate-600"><?= htmlspecialchars($p['desc']) ?></p>
-
-                        <div class="mt-6 flex flex-wrap gap-2">
-                            <?php foreach ($p['tags'] as $t): ?>
-                                <span class="rounded-full bg-white px-3 py-1 text-xs"><?= htmlspecialchars($t) ?></span>
-                            <?php endforeach; ?>
-                        </div>
-
-                        <a href="<?= htmlspecialchars($p['url']) ?>" target="_blank" rel="noopener"
-                            class="btn-primary mt-7 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-bold text-white">
-                            Visit <?= htmlspecialchars($p['name']) ?> ↗
-                        </a>
-                    </div>
-
-                    <div class="project-window rounded-2xl bg-slate-900 p-3 shadow-blue">
-                        <div class="overflow-hidden rounded-xl bg-white">
-                            <div class="flex items-center gap-1.5 border-b border-slate-100 px-3 py-2">
-                                <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
-                                <span class="h-2.5 w-2.5 rounded-full bg-yellow-400"></span>
-                                <span class="h-2.5 w-2.5 rounded-full bg-green-400"></span>
-                                <span
-                                    class="ml-2 truncate text-[10px] text-slate-400"><?= htmlspecialchars($p['url']) ?></span>
-                            </div>
-                            <img src="<?= screenshot_url($p['url']) ?>" alt="<?= htmlspecialchars($p['name']) ?> screenshot"
-                                loading="lazy" class="aspect-[3/2] w-full object-cover object-top">
-                        </div>
-                    </div>
+                <div class="p-project-shot"><img src="/assets/img/cache/RightHMS.png" alt="RightHMS website screenshot"
+                        loading="lazy"
+                        onerror="this.onerror=null;this.src='https://placehold.co/900x560/101827/ffffff?text=RightHMS+Preview'">
                 </div>
             </article>
-        <?php endforeach; ?>
-    </div>
-</section>
-
-<!-- ═══════════════════ SERVICES ═══════════════════ -->
-<section id="services" class="bg-slate-50 py-24 lg:py-32">
-    <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal text-center">
-            <p class="text-xs font-bold uppercase tracking-[.25em] text-primary">Services & Pricing</p>
-            <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">Choose your package</h2>
-            <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-500">
-                Transparent pricing. Instant enquiry via email + WhatsApp.
-            </p>
-        </div>
-
-        <div class="mt-14 grid gap-6 md:grid-cols-3">
-            <div class="relative rounded-3xl border-2 border-primary bg-white p-8 shadow-blue">
-                <span
-                    class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-[10px] font-bold text-white">
-                    MOST POPULAR
-                </span>
-                <p class="text-xs font-bold uppercase text-primary">CRM Subscription</p>
-                <h3 class="mt-2 text-2xl font-extrabold">Work Smart CRM</h3>
-                <div class="mt-5 flex items-baseline gap-1">
-                    <span class="text-4xl font-extrabold text-primary">₹1,500</span>
-                    <span class="text-sm text-slate-500">/ month</span>
+            <article class="p-project">
+                <div class="p-project-shot"><img src="/assets/img/cache/Meddoz.png" alt="Meddoz website screenshot"
+                        loading="lazy"
+                        onerror="this.onerror=null;this.src='https://placehold.co/900x560/102c27/ffffff?text=Meddoz+Preview'">
                 </div>
-                <ul class="mt-6 space-y-2.5 text-sm text-slate-600">
-                    <li>✓ Lead Management</li>
-                    <li>✓ Customer Management</li>
-                    <li>✓ Products & Services</li>
-                    <li>✓ Quotations</li>
-                    <li>✓ Tasks & Tickets</li>
-                    <li>✓ Reports</li>
-                </ul>
-                <button onclick="openLeadForm('crm')"
-                    class="btn-primary mt-7 w-full rounded-xl bg-primary py-3 text-sm font-bold text-white">
-                    Subscribe Now
-                </button>
-            </div>
-
-            <div class="rounded-3xl border border-slate-200 bg-white p-8">
-                <p class="text-xs font-bold uppercase text-sky-600">Website</p>
-                <h3 class="mt-2 text-2xl font-extrabold">Website Development</h3>
-                <div class="mt-5">
-                    <span class="text-2xl font-extrabold text-slate-900">Custom Quote</span>
-                </div>
-                <ul class="mt-6 space-y-2.5 text-sm text-slate-600">
-                    <li>✓ Business websites</li>
-                    <li>✓ Landing pages</li>
-                    <li>✓ React.js / PHP MVC</li>
-                    <li>✓ Responsive design</li>
-                    <li>✓ SEO-ready</li>
-                    <li>✓ 1 month support</li>
-                </ul>
-                <button onclick="openLeadForm('website')"
-                    class="btn-primary mt-7 w-full rounded-xl border border-primary bg-white py-3 text-sm font-bold text-primary">
-                    Get a Quote
-                </button>
-            </div>
-
-            <div class="rounded-3xl border border-slate-200 bg-white p-8">
-                <p class="text-xs font-bold uppercase text-green-600">Mobile</p>
-                <h3 class="mt-2 text-2xl font-extrabold">Android App Development</h3>
-                <div class="mt-5">
-                    <span class="text-2xl font-extrabold text-slate-900">Custom Quote</span>
-                </div>
-                <ul class="mt-6 space-y-2.5 text-sm text-slate-600">
-                    <li>✓ React Native + Expo</li>
-                    <li>✓ Business apps</li>
-                    <li>✓ REST API integration</li>
-                    <li>✓ Play Store deploy</li>
-                    <li>✓ Push notifications</li>
-                    <li>✓ 1 month support</li>
-                </ul>
-                <button onclick="openLeadForm('android')"
-                    class="btn-primary mt-7 w-full rounded-xl border border-green-600 bg-white py-3 text-sm font-bold text-green-600">
-                    Get a Quote
-                </button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════ PRODUCT SHOWCASE ═══════════════════ -->
-<section id="product" class="product-section overflow-hidden py-24 lg:py-32">
-    <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal text-center">
-            <span class="rounded-full bg-primary px-4 py-2 text-xs font-bold text-white">MY OWN PRODUCT</span>
-            <h2 class="mt-6 text-4xl font-extrabold sm:text-6xl">
-                Work Smart <span class="gradient-text">CRM</span>
-            </h2>
-            <p class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600">
-                A simple CRM platform designed for small and growing businesses to manage customers,
-                leads, quotations, tasks, tickets and daily activities from one place.
-            </p>
-        </div>
-
-        <div class="mt-16 grid items-center gap-14 lg:grid-cols-2">
-            <div class="reveal">
-                <div class="rounded-[2rem] border border-sky-100 bg-white p-5 shadow-blue">
-                    <div class="rounded-2xl bg-slate-950 p-5">
-                        <div class="flex items-center justify-between">
-                            <strong class="text-white">Work Smart CRM</strong>
-                            <span
-                                class="rounded-full bg-sky-400 px-3 py-1 text-[9px] font-bold text-slate-900">DASHBOARD</span>
-                        </div>
-                        <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                            <?php foreach ([['Leads', '128'], ['Customers', '86'], ['Tasks', '42'], ['Tickets', '18']] as $k): ?>
-                                <div class="rounded-xl bg-white/10 p-4">
-                                    <p class="text-[10px] text-slate-400"><?= $k[0] ?></p>
-                                    <p class="mt-2 text-xl font-bold text-white"><?= $k[1] ?></p>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                        <div class="mt-4 h-32 rounded-xl bg-gradient-to-r from-blue-500/20 to-sky-400/20"></div>
+                <div class="p-project-copy">
+                    <div class="p-project-meta"><span class="p-project-number">02 / WEB</span><span>Live project</span>
                     </div>
+                    <h3>Meddoz</h3>
+                    <p>Pharmacy billing and management software website with a clear, accessible experience for
+                        healthcare businesses.</p>
+                    <div class="p-tags"><span class="p-tag">Web</span><span class="p-tag">Business software</span></div>
+                    <a class="p-btn p-btn-primary" style="margin-top:23px" href="https://meddoz.com" target="_blank"
+                        rel="noopener">Visit Meddoz ↗</a>
                 </div>
-            </div>
-
-            <div class="reveal">
-                <p class="text-xs font-bold uppercase tracking-[.25em] text-primary">Built for businesses</p>
-                <h3 class="mt-4 text-3xl font-extrabold sm:text-4xl">
-                    Manage your business <span class="gradient-text">smarter.</span>
-                </h3>
-                <p class="mt-5 text-sm leading-7 text-slate-600">
-                    Work Smart CRM brings important business activities together in one simple platform.
-                </p>
-                <div class="mt-8 grid gap-4 sm:grid-cols-2">
-                    <?php foreach ([
-                        ['Lead Management', 'Track and manage business leads.'],
-                        ['Customers', 'Keep customer information organized.'],
-                        ['Quotations', 'Create and manage quotations.'],
-                        ['Tasks & Tickets', 'Organize work and customer support.'],
-                    ] as $f): ?>
-                        <div class="rounded-2xl bg-white p-5 shadow-sm">
-                            <p class="font-bold"><?= $f[0] ?></p>
-                            <p class="mt-2 text-xs leading-5 text-slate-500"><?= $f[1] ?></p>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-                <a href="<?= CRM_URL ?>" target="_blank" rel="noopener"
-                    class="btn-primary mt-8 inline-flex rounded-full bg-primary px-7 py-3.5 text-sm font-bold text-white">
-                    Explore Work Smart CRM ↗
-                </a>
-            </div>
+            </article>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- ═══════════════════ CLIENT REVIEWS (5★) ═══════════════════ -->
-<section id="reviews" class="bg-slate-50 py-24 lg:py-32 overflow-hidden">
-    <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal text-center">
-            <p class="text-xs font-bold uppercase tracking-[.25em] text-primary">Client Reviews</p>
-            <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">
-                What clients say <span class="gradient-text">about us</span>
-            </h2>
-            <div class="mt-5 inline-flex items-center gap-3 rounded-full bg-white px-5 py-2 shadow-sm">
-                <div class="flex text-yellow-400 text-lg">
-                    ★★★★★
-                </div>
-                <span class="text-sm font-bold text-slate-800">5.0</span>
-                <span class="text-xs text-slate-500">· Based on 47 reviews</span>
+    <section id="product" class="p-section p-product">
+        <div class="p-wrap">
+            <div style="text-align:center"><span class="p-status">✦ Personal product</span>
+                <h2 class="p-title" style="margin-top:20px">Work Smart <span class="p-gradient">CRM</span></h2>
+                <p class="p-muted" style="max-width:650px;margin:15px auto 0;line-height:1.8">A simple CRM concept for
+                    small and growing businesses to organize leads, customers, quotations, tasks, tickets, and daily
+                    activities in one place.</p>
             </div>
-            <p class="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-500">
-                Real feedback from clients we've worked with on web, mobile and CRM projects.
-            </p>
-        </div>
-    </div>
-
-    <!-- Moving reviews slider -->
-    <div class="review-slider mt-14">
-        <div class="review-track">
-            <?php
-            $reviews = [
-                [
-                    'name' => 'AnandhaKrishnan',
-                    'role' => 'Director, RightHMS',
-                    'url' => 'https://righthms.com',
-                    'text' => 'Bala delivered a clean, professional hospital management website that perfectly matches our brand. Communication was excellent throughout.',
-                    'stars' => 5,
-                ],
-                [
-                    'name' => 'AnandhaKrishnan',
-                    'role' => 'Owner, Meddoz Pharmacy',
-                    'url' => 'https://meddoz.com',
-                    'text' => 'The pharmacy billing website Bala built has completely simplified our operations. Fast, responsive and exactly what we needed.',
-                    'stars' => 5,
-                ],
-                [
-                    'name' => 'Thanigai Arasu',
-                    'role' => 'Founder, Sri Ganesh Foods',
-                    'url' => 'https://sriganeshfoods.in',
-                    'text' => 'Our catering business website is beautiful and easy to navigate. Bala understood our requirements from day one.',
-                    'stars' => 5,
-                ],
-                [
-                    'name' => 'AnandhaKrishnan',
-                    'role' => 'CTO, ASkeyCRM',
-                    'url' => 'https://crm.askeytech.com',
-                    'text' => 'Worked with Bala on our CRM platform. He wrote maintainable code and handled every requirement professionally.',
-                    'stars' => 5,
-                ],
-                [
-                    'name' => 'AnandhaKrishnan',
-                    'role' => 'Product Lead, ASkeyRetail',
-                    'url' => 'https://crm.askeytech.com',
-                    'text' => 'Bala built our React Native retail app on time and on budget. Users love how smooth and fast the app is.',
-                    'stars' => 5,
-                ],
-                [
-                    'name' => 'AnandhaKrishnan',
-                    'role' => 'Manager, RightKOT',
-                    'url' => 'https://righthms.com',
-                    'text' => 'Our kitchen order management app works flawlessly. Bala handled all API integrations smoothly. Highly recommended.',
-                    'stars' => 5,
-                ],
-                [
-                    'name' => 'Praburaj Pandian',
-                    'role' => 'Founder, SmartSteno',
-                    'url' => 'https://smartsteno.azurewebsites.net',
-                    'text' => 'The shorthand learning platform Bala built is used by students across India. Great UI and solid backend.',
-                    'stars' => 5,
-                ],
-                [
-                    'name' => 'Tritrix technologies, Fayaz',
-                    'role' => 'CEO, Infuex',
-                    'url' => 'https://balamurugandev.vercel.app',
-                    'text' => 'Wallet, chat and onboarding features built flawlessly in React Native. Bala is a reliable developer.',
-                    'stars' => 5,
-                ],
-            ];
-
-            // Duplicate for seamless infinite marquee
-            $reviewsLoop = array_merge($reviews, $reviews);
-
-            foreach ($reviewsLoop as $r):
-                ?>
-                <article class="review-card rounded-3xl border border-slate-200 bg-white p-7 shadow-soft">
-                    <!-- Header: avatar + name + stars -->
-                    <div class="flex items-start justify-between">
-                        <div class="flex items-center gap-3">
-                            <div
-                                class="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white font-bold text-lg">
-                                <?= strtoupper(substr($r['name'], 0, 1)) ?>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-800"><?= htmlspecialchars($r['name']) ?></h4>
-                                <p class="text-xs text-slate-500"><?= htmlspecialchars($r['role']) ?></p>
+            <div class="p-product-grid">
+                <div class="p-crm-frame"><img src="/assets/img/cache/work_smart_crm.png"
+                        alt="Work Smart CRM dashboard screenshot" loading="lazy"
+                        onerror="this.onerror=null;this.src='https://placehold.co/900x620/172033/ffffff?text=Work+Smart+CRM+Dashboard'">
+                </div>
+                <div>
+                    <h3 class="p-title" style="font-size:clamp(2rem,4vw,3.2rem)">Manage your business <span
+                            class="p-gradient">smarter.</span></h3>
+                    <p class="p-muted" style="line-height:1.8;margin-top:15px">Bring your team's important business
+                        activities together in one organized workspace.</p>
+                    <div style="display:grid;gap:12px;margin-top:25px">
+                        <div class="p-feature"><span class="p-feature-icon">↗</span>
+                            <div><strong>Lead management</strong>
+                                <p>Track prospects and follow up with confidence.</p>
                             </div>
                         </div>
-                        <div class="text-yellow-400 text-sm">
-                            <?= str_repeat('★', (int) $r['stars']) ?>
+                        <div class="p-feature"><span class="p-feature-icon">◎</span>
+                            <div><strong>Customer records</strong>
+                                <p>Keep customer information easy to find.</p>
+                            </div>
+                        </div>
+                        <div class="p-feature"><span class="p-feature-icon">✓</span>
+                            <div><strong>Tasks & activities</strong>
+                                <p>Stay on top of everyday business work.</p>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Review text -->
-                    <p class="mt-5 text-sm leading-7 text-slate-600">
-                        "<?= htmlspecialchars($r['text']) ?>"
-                    </p>
-
-                    <!-- Screenshot thumbnail from cache -->
-                    <a href="<?= htmlspecialchars($r['url']) ?>" target="_blank" rel="noopener"
-                        class="mt-5 block overflow-hidden rounded-xl border border-slate-100">
-                        <img src="<?= screenshot_url($r['url']) ?>" alt="<?= htmlspecialchars($r['name']) ?> project"
-                            loading="lazy"
-                            class="aspect-[16/9] w-full object-cover object-top transition duration-300 hover:scale-105">
-                    </a>
-
-                    <!-- Verified badge -->
-                    <div class="mt-4 flex items-center gap-1.5 text-xs text-green-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
-                            <path fill-rule="evenodd"
-                                d="M16.403 12.652a3 3 0 0 0 0-5.304 3 3 0 0 0-3.75-3.751 3 3 0 0 0-5.305 0 3 3 0 0 0-3.751 3.75 3 3 0 0 0 0 5.305 3 3 0 0 0 3.75 3.751 3 3 0 0 0 5.305 0 3 3 0 0 0 3.751-3.75Zm-2.546-4.46a.75.75 0 0 0-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        Verified Client
-                    </div>
-                </article>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════ EDUCATION / EXPERIENCE ═══════════════════ -->
-<section class="bg-white py-24 lg:py-32">
-    <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="reveal mb-12">
-            <p class="text-xs font-bold uppercase tracking-[.25em] text-primary">Background</p>
-            <h2 class="mt-3 text-4xl font-extrabold sm:text-5xl">Education & Experience</h2>
-        </div>
-        <div class="grid gap-5 md:grid-cols-2">
-            <div class="reveal rounded-3xl border border-slate-200 bg-white p-7">
-                <span class="text-xs font-bold text-primary">EDUCATION</span>
-                <h3 class="mt-4 text-xl font-bold">B.E. Computer Science & Engineering</h3>
-                <p class="mt-2 text-sm text-slate-500">Annamalai University</p>
-                <p class="mt-4 text-sm text-slate-500">2019 – 2023</p>
-                <div class="mt-5 inline-block rounded-full bg-sky-50 px-4 py-2 text-xs font-bold text-primary">
-                    OGPA 8.66
+                    <button class="p-btn p-btn-primary" style="margin-top:25px" type="button"
+                        onclick="openSubscriptionModal()">Enquire about CRM ↗</button>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="reveal rounded-3xl border border-slate-200 bg-white p-7">
-                <span class="text-xs font-bold text-primary">PROFESSIONAL</span>
-                <h3 class="mt-4 text-xl font-bold">Full Stack & Mobile Development</h3>
-                <p class="mt-2 text-sm leading-7 text-slate-500">
-                    Experience working on web and mobile applications using React Native,
-                    React.js, PHP MVC and MySQL.
+    <section id="contact" class="p-section">
+        <div class="p-wrap">
+            <div class="p-contact">
+                <p class="p-kicker" style="color:#a5a0ff;justify-content:center">Let's work together</p>
+                <h2 class="p-title" style="margin-top:17px">Have a project <span style="color:#8f9cff">in mind?</span>
+                </h2>
+                <p>I'm open to software development opportunities, freelance projects, and business application work.
                 </p>
-                <div class="mt-5 inline-block rounded-full bg-sky-50 px-4 py-2 text-xs font-bold text-primary">
-                    2+ Years Experience
-                </div>
+                <div class="p-contact-links"><a class="p-btn p-btn-primary"
+                        href="mailto:snbalamurugan20@gmail.com">Email me ↗</a><a class="p-btn p-btn-light"
+                        href="tel:+919384902854">Call me</a><button class="p-btn p-btn-light" type="button"
+                        onclick="openSubscriptionModal()">WhatsApp / Enquiry</button></div>
+                <div style="margin-top:25px;color:#9ca8bd;font-size:.85rem">snbalamurugan20@gmail.com&nbsp; · &nbsp;+91
+                    93849 02854</div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</main>
 
-<!-- ═══════════════════ CONTACT ═══════════════════ -->
-<section id="contact" class="bg-white py-24 lg:py-32">
-    <div class="mx-auto max-w-5xl px-5 lg:px-8">
-        <div class="reveal rounded-[2rem] bg-slate-950 p-8 text-center text-white shadow-blue sm:p-14">
-            <p class="text-xs font-bold uppercase tracking-[.25em] text-sky-400">Let's Work Together</p>
-
-            <h2 class="mt-4 text-4xl font-extrabold sm:text-5xl">
-                Have a project <span class="text-sky-400">in mind?</span>
-            </h2>
-
-            <p class="mx-auto mt-5 max-w-xl text-sm leading-7 text-slate-400">
-                I'm open to development opportunities, freelance projects and business applications.
-            </p>
-
-            <div class="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <button onclick="openLeadForm('crm')"
-                    class="btn-primary rounded-full bg-sky-400 px-7 py-3.5 text-sm font-bold text-slate-950">
-                    Start an Enquiry
-                </button>
-                <a href="tel:+919384902854"
-                    class="rounded-full border border-white/20 px-7 py-3.5 text-sm font-bold text-white transition hover:border-sky-400 hover:text-sky-400">
-                    Call Me
-                </a>
-            </div>
-
-            <div class="mt-10 grid gap-3 text-sm text-slate-400 sm:grid-cols-2">
-                <a href="mailto:snbalamurugan20@gmail.com" class="transition hover:text-sky-400">
-                    snbalamurugan20@gmail.com
-                </a>
-                <a href="tel:+919384902854" class="transition hover:text-sky-400">
-                    +91 93849 02854
-                </a>
-            </div>
-
-            <div class="mt-8 flex justify-center gap-5">
-                <a href="https://github.com/15balamurugan" target="_blank" rel="noopener"
-                    class="text-sm font-semibold text-slate-400 transition hover:text-white">GitHub</a>
-                <a href="https://www.linkedin.com/in/bala-murugan-34a7bb244" target="_blank" rel="noopener"
-                    class="text-sm font-semibold text-slate-400 transition hover:text-white">LinkedIn</a>
-                <a href="<?= PORTFOLIO_URL ?>" target="_blank" rel="noopener"
-                    class="text-sm font-semibold text-slate-400 transition hover:text-white">Portfolio</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
-<footer class="border-t border-slate-100 bg-white py-8">
-    <div
-        class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 text-center sm:flex-row lg:px-8">
-        <p class="text-xs text-slate-400">© <?= date('Y') ?> Bala Murugan. All rights reserved.</p>
-        <p class="text-xs text-slate-400">Full Stack Engineer · React Native · React.js</p>
-    </div>
-</footer>
-
-<!-- ═══════════════════ LEAD MODAL ═══════════════════ -->
-<div id="leadModal"
-    class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm">
-    <div class="w-full max-w-lg rounded-3xl bg-white p-7 shadow-2xl">
-        <div class="flex items-start justify-between">
-            <div>
-                <p class="text-xs font-bold uppercase tracking-widest text-primary">Enquire Now</p>
-                <h3 id="modalTitle" class="mt-1 text-2xl font-extrabold">Let's Talk</h3>
-            </div>
-            <button onclick="closeLeadForm()"
-                class="text-2xl leading-none text-slate-400 hover:text-slate-800">&times;</button>
-        </div>
-
-        <form id="leadForm" class="mt-5 space-y-3" onsubmit="submitLead(event)">
-            <input type="hidden" name="package" id="leadPackage" />
-
-            <input name="name" required placeholder="Your name"
-                class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-primary focus:outline-none" />
-
-            <input name="email" type="email" required placeholder="Email address"
-                class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-primary focus:outline-none" />
-
-            <input name="phone" required placeholder="WhatsApp number (e.g. 919384902854)"
-                class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-primary focus:outline-none" />
-
-            <textarea name="message" rows="3" placeholder="Your message (optional)"
-                class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-primary focus:outline-none"></textarea>
-
-            <div id="leadPrice" class="text-xs text-slate-500"></div>
-
-            <button type="submit" id="leadSubmit"
-                class="btn-primary w-full rounded-xl bg-primary py-3 text-sm font-bold text-white">
-                Send Enquiry & Open WhatsApp
-            </button>
-            <p id="leadResult" class="text-xs"></p>
-        </form>
-    </div>
-</div>
-
-<!-- ═══════════════════ FLOATING WHATSAPP BUTTON ═══════════════════ -->
-<a href="<?= wa_link('Hi Bala, I am interested in your services') ?>" target="_blank" rel="noopener"
-    class="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-xl transition hover:scale-110"
-    aria-label="Chat on WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-7 w-7">
-        <path
-            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-        <path
-            d="M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.892c0 2.096.549 4.142 1.595 5.945L0 24l6.335-1.652a12.02 12.02 0 0 0 5.71 1.447h.006c6.585 0 11.946-5.336 11.949-11.896 0-3.176-1.24-6.165-3.495-8.411z" />
-    </svg>
-</a>
-
-<!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
-<script src="/assets/js/main.js"></script>
-
-</body>
-
-</html>
+<?php require_once __DIR__ . '/../includes/footer.php'; ?>
