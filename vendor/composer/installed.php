@@ -3,7 +3,7 @@
         'name' => 'bala/portfolio',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'dc69e16becd94ffb0677f7e271899a8e250a2cc1',
+        'reference' => 'a43d49077369b50d7cb098fcc69c163769d20372',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'bala/portfolio' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'dc69e16becd94ffb0677f7e271899a8e250a2cc1',
+            'reference' => 'a43d49077369b50d7cb098fcc69c163769d20372',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
